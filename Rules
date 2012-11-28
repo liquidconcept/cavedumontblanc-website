@@ -13,8 +13,19 @@
 #   item, use the pattern “/about/*/”; “/about/*” will also select the parent,
 #   because “*” matches zero or more characters.
 
-compile '/stylesheet/' do
-  # don’t filter or layout
+############ Compass ############
+require 'compass'
+Compass.add_project_configuration 'config/compass.rb'
+
+############ Compile ############
+compile '/images/*/' do
+end
+
+compile '/stylesheets/*/' do
+  filter :sass, Compass.sass_engine_options
+end
+
+compile '/javascripts/*/' do
 end
 
 compile '*' do
@@ -26,18 +37,34 @@ compile '*' do
   end
 end
 
-route '/stylesheet/' do
-  '/style.css'
+############ Route ############
+route '/images/' do
+  item.identifier.chop + '.' + item[:extension]
+end
+
+route '/stylesheets/_*/' do
+end
+
+route '/stylesheets/*/' do
+  item.identifier.chop + '.css'
+end
+
+route '/javascript/*/' do
+  item.identifier.chop + '.js'
+end
+
+route '/htaccess/' do
+  '/.htaccess'
 end
 
 route '*' do
-  if item.binary?
-    # Write item with identifier /foo/ to /foo.ext
-    item.identifier.chop + '.' + item[:extension]
-  else
-    # Write item with identifier /foo/ to /foo/index.html
+  if item.children.size > 0 || item.identifier == '/'
     item.identifier + 'index.html'
+  else
+    item.identifier.gsub(/\/$/, '') + '.' + item[:extension]
   end
 end
 
+############ Layout ############
 layout '*', :erb
+
