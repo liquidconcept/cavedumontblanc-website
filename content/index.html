@@ -1,5 +1,9 @@
----
-title: Accueil
----
-
-<h1>Cave du Mont Blanc</h1>
+<header>
+  <p>header</p>
+</header>
+<div id='promotions'>
+  <p>promo</p>
+  <% vines.each do |item| %>
+    <%= item[:name] %>
+  <% end %>
+</div>
