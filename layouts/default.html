@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="utf-8">
     <title>La cave du Mont-Blanc - vins italiens de grand qualités - Lausanne, Montreux, Riviera</title>
@@ -7,6 +7,21 @@
     <meta name="generator" content="nanoc 3.3.1">
   </head>
   <body>
-    <%= yield %>
+    <section class="main">
+      <header class="main">
+        <h1 id='logo'>La cave du Mont-Blanc - vins italiens de grand qualités - Lausanne, Montreux, Riviera</h1>
+        <nav>
+          <ul>
+            <li><a href="#">Promotions</a> |</li>
+            <li><a href="#">Commander</a> |</li>
+            <li><a href="#">Nous trouver</a></li>
+          </ul>
+        </nav>
+        <hr class='clearboth' />
+      </header>
+      <section class="content">
+        <%= yield %>
+      </section>
+    </section>
   </body>
 </html>

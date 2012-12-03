@@ -1,19 +1,227 @@
 @import "compass/reset";
 @import "compass/css3";
+@import "compass/typography/text/replacement";
+
+@import url(http://fonts.googleapis.com/css?family=Questrial);
 
 /*----------------------------------------*/
 /*                 COLOR                  */
 /*----------------------------------------*/ 
 
+$grey: #A6A6A6;
+$dark_grey: #393939;
 $dark_blue: #212A45;
+$red: #861C30;
 
 /*----------------------------------------*/
 /*                DEFAULT                 */
 /*----------------------------------------*/ 
 
 body {
+
   h1 {
-    font-size: 2em;
-    color: $dark_blue;
+    font-size: 2.5em;
+    color: $dark_grey;
+    font-family: 'Questrial', sans-serif;
+  }
+
+  h3 {
+    font-size: 1.8em;
+    color: $dark_grey;
+    font-family: 'Questrial', sans-serif;
+  }
+
+  p, legend {
+    font-family: 'Questrial', sans-serif;
+    color: $dark_grey;
+    text-align: justify;
+  }
+
+  a {
+    font-family: 'Questrial', sans-serif;
+    color: $dark_grey;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: $red;
+  }
+
+  .clearboth {
+    width: 0px;
+    height: 0px;
+    clear: both;
+    border-width: 0px; 
+  }
+
+}
+  
+/*----------------------------------------*/
+/*                  MAIN                  */
+/*----------------------------------------*/ 
+
+section.main {
+  width: 960px;
+  margin: 0 auto;
+
+  header.main {
+    h1 {
+      @include replace-text-with-dimensions('logo_cave_du_mont-blanc.png', 50%, 50%, true);
+      float: left;
+      margin: 10px 0;
+    }
+  }
+  nav {
+    margin: 10px 0px 10px 0px;
+    
+
+    ul {
+      float: right;
+      margin-top: 10px;
+
+      li {
+        display: inline;
+      }
+    }           
   }
 }
+
+/*----------------------------------------*/
+/*             CONTENT HEADER             */
+/*----------------------------------------*/
+
+header.content {
+  $padding-top: 100px;
+  height: image-height('wine_header.jpg') - $padding-top;
+  border-top: 1px solid $grey;
+  background: inline-image('wine_header.jpg') bottom right no-repeat;
+  padding: $padding-top 0 0 20px;
+
+  legend {
+    font-size: 1.3em;
+  }
+}
+
+/*----------------------------------------*/
+/*              PROMOTIONS                */
+/*----------------------------------------*/
+  
+#promotions {
+  display: block;
+  height: 379px;
+  padding: 20px 20px 0px 20px;
+  border-top: 1px solid $grey;
+  overflow: hidden;
+
+  .items {
+    position: relative;
+    display: block;
+  }
+
+  .item {
+    position: absolute;
+    background-color: white;
+    top: 0px;
+    left: 0px;
+    height: 379px;
+    width: 100%;
+    display: block;
+    margin-top: 20px;
+
+    .info {
+      float: left;
+
+      .description {
+        font-size: 0.9em;
+        margin-top: 8px;
+      }
+    }
+
+    .price_bottle {
+      width: 100px;
+      float: right;
+
+      border-right: 1px solid $grey; 
+
+      p {
+        font-size: 1.2em;
+        text-align: center;
+        margin-bottom: 5px;
+      }      
+    }
+
+    .price_box {
+      width: 100px;
+      float: right;
+      margin: 0px 50px 0px 30px;
+
+      p {
+        font-size: 1.2em;
+        text-align: center;
+        margin-bottom: 5px;
+      } 
+    }
+
+    .price {
+      color: $red;
+    }
+
+    .bottle {
+      position: absolute;
+      bottom: -50px;
+      left: 0px;
+    } 
+  }
+}
+
+/*----------------------------------------*/
+/*                COMMAND                 */
+/*----------------------------------------*/
+
+#command {
+  height: 379px;
+  padding: 20px 20px 0px 20px;
+  border-top: 1px solid $grey;
+}
+
+/*----------------------------------------*/
+/*                CONTACT                 */
+/*----------------------------------------*/
+
+#contact {
+  height: 379px;
+  padding: 20px 20px 0px 20px;
+  border-top: 1px solid $grey;
+
+  #info_contact {
+    width: 430px;
+    margin-top: 20px;
+    float: left;
+  }
+
+  #google_map {
+    height: 300px;
+    margin-top: 20px;
+    overflow: hidden;
+    float: right;
+  }
+}
+
+/*----------------------------------------*/
+/*                 FOOTER                 */
+/*----------------------------------------*/
+
+footer {
+  height: 50px;
+  padding: 20px 20px 0px 20px;
+  border-top: 1px solid $grey;
+
+  p {
+    width: 550px;
+    font-size: 0.8em;
+    margin: 0 auto;
+  }
+}
+
+
+

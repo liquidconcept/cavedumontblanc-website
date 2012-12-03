@@ -1,9 +1,51 @@
-<header>
-  <p>header</p>
+<header class="content">
+  <h1>C'est déjà Noël</h1>
+  <legend>Profitez des promotions uniques de la cave du Mont-Blanc</legend>
 </header>
-<div id='promotions'>
-  <p>promo</p>
-  <% vines.each do |item| %>
-    <%= item[:name] %>
+<article id="promotions">
+  <h1>Promotions</h1>
+  <section class="items">
+  <% wines.each_with_index do |item, index| %>
+    <article class="item item_<%= index %>">
+      <div class='info'>
+        <h3><%= item[:name] %></h3>
+        <p><%= item[:from] %> <%= item[:year] %> <%= item[:size] %></p>
+        <p class='description'><%= item[:description] %></p>
+      </div>
+      <div class='price_box'>
+        <p>Caisse</p>
+        <p class='price'><%= item[:price_box] %></p>
+      </div>
+      <div class='price_bottle'>
+        <p>Bouteille</p>
+        <p class='price'><%= item[:price_bottle] %></p>
+      </div>
+      <img src="<%= item[:image] %>" class='bottle'>
+    </article>
   <% end %>
-</div>
+  </section>
+</article>
+<article id='command'>
+  <h1>Commander</h1>
+</article>
+<article id='contact'>
+  <h1>Nous trouver</h1>
+  <div id='info_contact'>
+    <p>Nous disposons d'une grande palette de vins italiens
+    et français et sommes en mesure de satisfaire vos
+    exigences. N'hésitez donc pas à nous contacter.</p><br />
+    <address>
+      <p>La cave Mont-blanc</p>
+      <p>Avenue de Cour 6A</p>
+      <p>1007 Lausanne</p><br />
+      <p id='phone_number'>+41 (0)21 616 92 92</p>
+      <p id='mail_address'>cavedumontblanc@citycable.ch</p>
+    </address>
+  </div>
+  <div id='google_map'>
+    <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.ch/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Avenue+de+Cour+6A,+Lausanne&amp;aq=0&amp;oq=Avenue+de+Cour+6A&amp;sll=47.36539,8.525033&amp;sspn=0.024446,0.066047&amp;ie=UTF8&amp;hq=&amp;hnear=Avenue+de+Cour+6A,+1007+Lausanne,+Vaud&amp;ll=46.512244,6.626392&amp;spn=0.012419,0.033023&amp;t=m&amp;z=14&amp;output=embed"></iframe><br /><small><a href="https://maps.google.ch/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Avenue+de+Cour+6A,+Lausanne&amp;aq=0&amp;oq=Avenue+de+Cour+6A&amp;sll=47.36539,8.525033&amp;sspn=0.024446,0.066047&amp;ie=UTF8&amp;hq=&amp;hnear=Avenue+de+Cour+6A,+1007+Lausanne,+Vaud&amp;ll=46.512244,6.626392&amp;spn=0.012419,0.033023&amp;t=m&amp;z=14" style="color:#0000FF;text-align:left"></a></small>
+  </div>
+</article>
+<footer>
+  <p>© 2012 La cave du Mont-Blanc. All Rights Reserved. Site développé par <a href="http://www.liquid-concept.ch">Liquid Concept</a></p>
+</footer>
