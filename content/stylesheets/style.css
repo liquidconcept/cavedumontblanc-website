@@ -16,6 +16,35 @@ $dark_blue: #212A45;
 $red: #861C30;
 
 /*----------------------------------------*/
+/*                MIXINS                  */
+/*----------------------------------------*/
+
+@mixin disable-box($disable_image) {
+  &.disable {
+    * {
+      @include opacity(0.6);
+    }
+
+    [disabled] {
+      @include opacity(1);
+    }
+
+    .out_of_stock {
+      @include opacity(1);
+      width: image-width($disable_image);
+      height: image-height($disable_image);
+      position: absolute;
+      top: 0px;
+      left: 50%;
+      margin-left: -(image-width($disable_image) / 2);
+      display: block;
+      background: inline-image($disable_image) top no-repeat;
+      z-index: 10;
+    }
+  } 
+}
+
+/*----------------------------------------*/
 /*                DEFAULT                 */
 /*----------------------------------------*/ 
 
@@ -163,56 +192,28 @@ header.content {
       }
     }
 
-    .price_bottle {
+    .price_container {
       width: 150px;
-      float: right;
-      padding-right: 10px;
-      border-right: 1px solid $grey; 
-
-      p {
-        font-size: 1.2em;
-        text-align: center;
-        margin-bottom: 5px;
-      }      
-    }
-
-    .price_box {
-      width: 150px;
-      float: right;
-      margin-right: 10px;
-
-      p {
-        font-size: 1.2em;
-        text-align: center;
-        margin-bottom: 5px;
-      } 
-    }
-
-    .price_box {
-      height: 150px;
-      margin-top: -25px;
       position: relative;
+      float: right;
+      padding-top: 20px;
+      padding-right: 10px;
 
-      &.disable .out_of_stock {
-        width: image-width('disable.png');
-        height: image-height('disable.png');
-        position: absolute;
-        top: 0px;
-        left: 50%;
-        margin-left: -(image-width('disable.png') / 2);
-        display: block;
-        background: inline-image('disable.png') top no-repeat;
-        z-index: 10;
+      &.bottles {
+        border-right: 1px solid $grey; 
       }
 
       p {
-        margin-top: 25px;
-        color: $dark_grey;
-      }  
-    }
+        font-size: 1.2em;
+        text-align: center;
+        margin-bottom: 5px;
+      }
 
-    .price {
-      color: $red;
+      .price {
+        color: $red;
+      }
+
+      @include disable-box('disable.png');
     }
 
     .bottle {
@@ -318,6 +319,7 @@ header.content {
         display: block;
         float: right;
         margin-left: 10px;
+        position: relative;
 
         span {
           display: block;
@@ -333,21 +335,8 @@ header.content {
         .field {
           width: 60px;
         }
-      }
 
-      .disable {
-        width: 66px;
-        height: 43px;
-        margin-top: 10px;
-        background: inline-image('min_disable.png') top no-repeat;
-
-        .label {
-          margin-top: -10px;
-        }
-
-        .field {
-          display: none;
-        }
+        @include disable-box('min_disable.png');
       }
     }
 

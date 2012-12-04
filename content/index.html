@@ -13,12 +13,12 @@
         <p class="description"><%= item[:from] %>, <%= item[:domain] %>, <%= item[:year] %> - <%= item[:size] %></p>
         <p class="grape"><%= item[:grape] %> <% if item[:grape_from] != nil %> - <%= item[:grape_from] %><% end %></p>
       </div>
-      <div class="price_box<%= item[:stock_box] ? nil : ' disable' %>">
+      <div class="price_container boxes<%= item[:stock_box] ? nil : ' disable' %>">
         <p>Caisse</p>
         <p class="price"><%= item[:price_box] %></p>
         <div class="out_of_stock"></div>
       </div>
-      <div class="price_bottle<%= item[:stock_bottle] ? nil : ' disable' %>">
+      <div class="price_container bottles<%= item[:stock_bottle] ? nil : ' disable' %>">
         <p>Bouteille</p>
         <p class="price"><%= item[:price_bottle] %></p>
         <div class="out_of_stock"></div>
@@ -65,12 +65,14 @@
             <div class="price_container boxes<%= item[:stock_box] ? nil : ' disable' %>">
               <span class="label">Caisse</span>
               <span class="price"><%= item[:price_box] || '&nbsp;' %></span>
-              <input type="number" name="bottle" placeholder="Qte" class="field">
+              <input type="number" name="bottle" placeholder="Qte" class="field"<%= item[:stock_box] ? nil : ' disabled' %>>
+              <div class="out_of_stock"></div>
             </div>
             <div class="price_container bottles <%= item[:stock_bottle] ? nil : ' disable' %>">
               <span class="label">Bouteille</span>
               <span class="price"><%= item[:price_bottle] || '&nbsp;' %></span>
-              <input type="number" name="bottle" placeholder="Qte" class="field">
+              <input type="number" name="bottle" placeholder="Qte" class="field"<%= item[:stock_bottle] ? nil : ' disabled' %>>
+              <div class="out_of_stock"></div>
             </div>
           </article>
         <% end %>
