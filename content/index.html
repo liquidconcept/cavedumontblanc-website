@@ -2,12 +2,13 @@
   <h1>C'est déjà Noël</h1>
   <legend>Profitez des promotions uniques de la cave du Mont-Blanc</legend>
 </header>
+<a id="anchor_promo"></a>
 <article id="promotions">
   <h1>Promotions</h1>
   <section class="items">
   <% wines.each_with_index do |item, index| %>
     <article class="item item_<%= index %>">
-      <div class='info'>
+      <div class="info">
         <h3><%= item[:name] %></h3>
         <p class="description"><%= item[:from] %>, <%= item[:domain] %>, <%= item[:year] %> - <%= item[:size] %></p>
         <p class="grape"><%= item[:grape] %> <% if item[:grape_from] != nil %> - <%= item[:grape_from] %><% end %></p>
@@ -15,43 +16,73 @@
       <div class="price_box<%= item[:stock_box] ? nil : ' disable' %>">
         <p>Caisse</p>
         <p class="price"><%= item[:price_box] %></p>
+        <div class="out_of_stock"></div>
       </div>
       <div class="price_bottle<%= item[:stock_bottle] ? nil : ' disable' %>">
         <p>Bouteille</p>
         <p class="price"><%= item[:price_bottle] %></p>
+        <div class="out_of_stock"></div>
       </div>
       <img src="<%= item[:image] %>" class="bottle">
     </article>
   <% end %>
   </section>
 </article>
+<a id="anchor_command"></a>
 <article id="command">
-  <h1>Commander</h1>
-  <div id="form_left">
-    <h3>Vos informations</h3>
-    <form action="#">
+  <form action="#">
+    <h1>Commander</h1>
+    <div id="address">
+      <h3>Vos informations</h3>
       <input type="text" name="firstname" placeholder="Prénom" class="name">
       <input type="text" name="lastname" placeholder="Nom" class="name">
       <input type="text" name="address" placeholder="Adresse" class="address">
       <input type="text" name="code" placeholder="Code Postal" class="code">
       <input type="text" name="city" placeholder="Ville" class="city">
-      <input type="number" name="phone" placeholder="Téléphone" class="phone">
+      <input type="phone" name="phone" placeholder="Téléphone" class="phone">
       <input type="email" name="email" placeholder="Email" class="email"><br />
-      <input type="checkbox" name="delivery_address" value="false"><span>Ajouter une adresse de livraison</span>
+      <label><input type="checkbox" name="delivery_address" value="address_delevery" checked>Cette adresse est mon adresse de livraison</label>
       <div id="condition">
         <h4>Conditions Générales de Vente</h4>
         <p>Une fois la commande passée, vous recevez une facture que nous vous demandons de régler. La livraison ne s'effectuera qu'une fois le facture payée.</p>
       </div>
-  </div>
-  <div id='form_right'>
-    <h3>Votre commande</h3>
-    <% wines.each_with_index do |item, index| %>
-      <p><img src="<%= item[:min_image] %>" /></p>
-    <% end %>
-    <input type="submit" value="Envoyer" class="submit">
-    </form>
-  </div>
+      <input type="text" name="firstname" placeholder="Prénom" class="name">
+      <input type="text" name="lastname" placeholder="Nom" class="name">
+      <input type="text" name="address" placeholder="Adresse" class="address">
+      <input type="text" name="code" placeholder="Code Postal" class="code">
+      <input type="text" name="city" placeholder="Ville" class="city">
+    </div>
+    <div id="order_form">
+      <h3>Votre commande</h3>
+      <content>
+        <% wines.each_with_index do |item, index| %> 
+          <article class="item item_<%= index %>">
+            <img src="<%= item[:min_image] %>" />
+            <div class="info">
+              <span class="name"><%= item[:name] %></span><br />
+              <span class="description"><%= item[:from] %>, <%= item[:domain] %>, <%= item[:year] %> - <%= item[:size] %></span>
+            </div>
+            <div class="price_container boxes<%= item[:stock_box] ? nil : ' disable' %>">
+              <span class="label">Caisse</span>
+              <span class="price"><%= item[:price_box] || '&nbsp;' %></span>
+              <input type="number" name="bottle" placeholder="Qte" class="field">
+            </div>
+            <div class="price_container bottles <%= item[:stock_bottle] ? nil : ' disable' %>">
+              <span class="label">Bouteille</span>
+              <span class="price"><%= item[:price_bottle] || '&nbsp;' %></span>
+              <input type="number" name="bottle" placeholder="Qte" class="field">
+            </div>
+          </article>
+        <% end %>
+        <div class="buttons">
+          <label class="agree"><input type="checkbox" name="accept_conditions" value="false"> J'ai lu et adhéré aux conditions générales</label>
+          <input type="submit" value="Envoyer" class="submit">
+        </div>
+      </content>
+    </div>
+  </form>
 </article>
+<a id="anchor_contact"></a>
 <article id="contact">
   <h1>Nous trouver</h1>
   <div id="info_contact">
@@ -67,7 +98,7 @@
     </address>
   </div>
   <div id="google_map">
-    <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.ch/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Avenue+de+Cour+6A,+Lausanne&amp;aq=0&amp;oq=Avenue+de+Cour+6A&amp;sll=47.36539,8.525033&amp;sspn=0.024446,0.066047&amp;ie=UTF8&amp;hq=&amp;hnear=Avenue+de+Cour+6A,+1007+Lausanne,+Vaud&amp;ll=46.512244,6.626392&amp;spn=0.012419,0.033023&amp;t=m&amp;z=14&amp;output=embed"></iframe><br /><small><a href="https://maps.google.ch/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Avenue+de+Cour+6A,+Lausanne&amp;aq=0&amp;oq=Avenue+de+Cour+6A&amp;sll=47.36539,8.525033&amp;sspn=0.024446,0.066047&amp;ie=UTF8&amp;hq=&amp;hnear=Avenue+de+Cour+6A,+1007+Lausanne,+Vaud&amp;ll=46.512244,6.626392&amp;spn=0.012419,0.033023&amp;t=m&amp;z=14" style="color:#0000FF;text-align:left"></a></small>
+    <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.ch/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;iwloc=&amp;q=Avenue+de+Cour+6A&amp;aq=&amp;sll=46.362093,9.036255&amp;sspn=6.709668,16.907959&amp;ie=UTF8&amp;hq=&amp;hnear=Avenue+de+Cour+6A,+1007+Lausanne,+Vaud&amp;t=m&amp;ll=46.511094,6.62673&amp;spn=0.020674,0.036478&amp;z=14&amp;output=embed"></iframe><br /><small><a href="https://maps.google.ch/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Avenue+de+Cour+6A&amp;aq=&amp;sll=46.362093,9.036255&amp;sspn=6.709668,16.907959&amp;ie=UTF8&amp;hq=&amp;hnear=Avenue+de+Cour+6A,+1007+Lausanne,+Vaud&amp;t=m&amp;ll=46.511094,6.62673&amp;spn=0.020674,0.036478&amp;z=14" style="color:#0000FF;text-align:left">View Larger Map</a></small>
   </div>
 </article>
 <footer>
