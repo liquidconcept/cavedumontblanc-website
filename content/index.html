@@ -34,23 +34,27 @@
     <h1>Commander</h1>
     <div id="address">
       <h3>Vos informations</h3>
-      <input type="text" name="firstname" placeholder="Prénom" class="name">
-      <input type="text" name="lastname" placeholder="Nom" class="name">
-      <input type="text" name="address" placeholder="Adresse" class="address">
-      <input type="text" name="code" placeholder="Code Postal" class="code">
-      <input type="text" name="city" placeholder="Ville" class="city">
-      <input type="phone" name="phone" placeholder="Téléphone" class="phone">
-      <input type="email" name="email" placeholder="Email" class="email"><br />
+      <fieldset name="bild_address_fields">
+        <input type="text" name="firstname" placeholder="Prénom" class="name">
+        <input type="text" name="lastname" placeholder="Nom" class="name">
+        <input type="text" name="address" placeholder="Adresse" class="address">
+        <input type="text" name="code" placeholder="Code Postal" class="code">
+        <input type="text" name="city" placeholder="Ville" class="city">
+        <input type="phone" name="phone" placeholder="Téléphone" class="phone">
+        <input type="email" name="email" placeholder="Email" class="email"><br />
+      </fieldset>
       <label><input type="checkbox" name="delivery_address" value="address_delevery" checked>Cette adresse est mon adresse de livraison</label>
+      <fieldset name="delivery_address_fields">
+        <input type="text" name="firstname" placeholder="Prénom" class="name">
+        <input type="text" name="lastname" placeholder="Nom" class="name">
+        <input type="text" name="address" placeholder="Adresse" class="address">
+        <input type="text" name="code" placeholder="Code Postal" class="code">
+        <input type="text" name="city" placeholder="Ville" class="city">
+      </fieldset>
       <div id="condition">
         <h4>Conditions Générales de Vente</h4>
         <p>Une fois la commande passée, vous recevez une facture que nous vous demandons de régler. La livraison ne s'effectuera qu'une fois le facture payée.</p>
       </div>
-      <input type="text" name="firstname" placeholder="Prénom" class="name">
-      <input type="text" name="lastname" placeholder="Nom" class="name">
-      <input type="text" name="address" placeholder="Adresse" class="address">
-      <input type="text" name="code" placeholder="Code Postal" class="code">
-      <input type="text" name="city" placeholder="Ville" class="city">
     </div>
     <div id="order_form">
       <h3>Votre commande</h3>
