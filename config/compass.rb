@@ -14,7 +14,7 @@ sass_dir        = 'content/stylesheets'
 images_dir      = 'content/images'
 javascripts_dir = 'content/javascripts'
 
-output_style    = ENV['RACK_ENV'] != 'production' ? :nested : :compressed
+output_style    = :nested
 
 sass_options = {
   :syntax => :scss

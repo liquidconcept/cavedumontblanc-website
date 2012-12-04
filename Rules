@@ -23,9 +23,11 @@ end
 
 compile '/stylesheets/*/' do
   filter :sass, Compass.sass_engine_options
+  filter :yui_compressor, :type => 'css' if ENV['RACK_ENV'] == 'production'
 end
 
 compile '/javascripts/*/' do
+  filter :yui_compressor, :type => 'js' if ENV['RACK_ENV'] == 'production'
 end
 
 compile '*' do

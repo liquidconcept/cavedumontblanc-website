@@ -6,26 +6,26 @@
 <article id="promotions">
   <h1>Promotions</h1>
   <section class="items">
-  <% wines.each_with_index do |item, index| %>
-    <article class="item item_<%= index %>">
-      <div class="info">
-        <h3><%= item[:name] %></h3>
-        <p class="description"><%= item[:from] %>, <%= item[:domain] %>, <%= item[:year] %> - <%= item[:size] %></p>
-        <p class="grape"><%= item[:grape] %> <% if item[:grape_from] != nil %> - <%= item[:grape_from] %><% end %></p>
-      </div>
-      <div class="price_container boxes<%= item[:stock_box] ? nil : ' disable' %>">
-        <p>Caisse</p>
-        <p class="price"><%= item[:price_box] %></p>
-        <div class="out_of_stock"></div>
-      </div>
-      <div class="price_container bottles<%= item[:stock_bottle] ? nil : ' disable' %>">
-        <p>Bouteille</p>
-        <p class="price"><%= item[:price_bottle] %></p>
-        <div class="out_of_stock"></div>
-      </div>
-      <img src="<%= item[:image] %>" class="bottle">
-    </article>
-  <% end %>
+    <% wines.each_with_index do |item, index| %>
+      <article class="item item_<%= index %>">
+        <div class="info">
+          <h3><%= item[:name] %></h3>
+          <p class="description"><%= item[:from] %>, <%= item[:domain] %>, <%= item[:year] %> - <%= item[:size] %></p>
+          <p class="grape"><%= item[:grape] %> <% if item[:grape_from] != nil %> - <%= item[:grape_from] %><% end %></p>
+        </div>
+        <div class="price_container boxes<%= item[:stock_box] ? nil : ' disable' %>">
+          <p>Caisse</p>
+          <p class="price"><%= item[:price_box] %></p>
+          <div class="out_of_stock"></div>
+        </div>
+        <div class="price_container bottles<%= item[:stock_bottle] ? nil : ' disable' %>">
+          <p>Bouteille</p>
+          <p class="price"><%= item[:price_bottle] %></p>
+          <div class="out_of_stock"></div>
+        </div>
+        <img src="<%= item[:image] %>" class="bottle">
+      </article>
+    <% end %>
   </section>
 </article>
 <a id="anchor_command"></a>
@@ -58,7 +58,7 @@
     </div>
     <div id="order_form">
       <h3>Votre commande</h3>
-      <content>
+      <section>
         <% wines.each_with_index do |item, index| %> 
           <article class="item item_<%= index %>">
             <img src="<%= item[:min_image] %>" />
@@ -84,7 +84,7 @@
           <label class="agree"><input type="checkbox" name="accept_conditions" value="false"> J'ai lu et adhéré aux conditions générales</label>
           <input type="submit" value="Envoyer" class="submit">
         </div>
-      </content>
+      </section>
     </div>
   </form>
 </article>
@@ -104,7 +104,7 @@
     </address>
   </div>
   <div id="google_map">
-    <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.ch/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;iwloc=&amp;q=Avenue+de+Cour+6A&amp;aq=&amp;sll=46.362093,9.036255&amp;sspn=6.709668,16.907959&amp;ie=UTF8&amp;hq=&amp;hnear=Avenue+de+Cour+6A,+1007+Lausanne,+Vaud&amp;t=m&amp;ll=46.511094,6.62673&amp;spn=0.020674,0.036478&amp;z=14&amp;output=embed"></iframe><br /><small><a href="https://maps.google.ch/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Avenue+de+Cour+6A&amp;aq=&amp;sll=46.362093,9.036255&amp;sspn=6.709668,16.907959&amp;ie=UTF8&amp;hq=&amp;hnear=Avenue+de+Cour+6A,+1007+Lausanne,+Vaud&amp;t=m&amp;ll=46.511094,6.62673&amp;spn=0.020674,0.036478&amp;z=14" style="color:#0000FF;text-align:left">View Larger Map</a></small>
+    <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.ch/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;iwloc=&amp;q=Avenue+de+Cour+6A&amp;aq=&amp;sll=46.362093,9.036255&amp;sspn=6.709668,16.907959&amp;ie=UTF8&amp;hq=&amp;hnear=Avenue+de+Cour+6A,+1007+Lausanne,+Vaud&amp;t=m&amp;ll=46.511094,6.62673&amp;spn=0.020674,0.036478&amp;z=14&amp;output=embed"></iframe><br /><small><a href="https://maps.google.ch/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Avenue+de+Cour+6A&amp;aq=&amp;sll=46.362093,9.036255&amp;sspn=6.709668,16.907959&amp;ie=UTF8&amp;hq=&amp;hnear=Avenue+de+Cour+6A,+1007+Lausanne,+Vaud&amp;t=m&amp;ll=46.511094,6.62673&amp;spn=0.020674,0.036478&amp;z=14" style="color:#0000FF;text-align:left">View Larger Map</a></small>
   </div>
 </article>
 <footer>
