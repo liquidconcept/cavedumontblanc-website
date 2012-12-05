@@ -189,6 +189,10 @@
             $('<p>Commande envoyée avec succès</p>').hide().appendTo($('#command')).fadeIn();
             overlayToggle($('#command'));
           });
+
+          if (_gaq !== undefined) {
+            _gaq.push(['_trackPageview', '/command']);
+          }
         },
         error: function(xhr, status, error) {
           overlayToggle($('#command'));
