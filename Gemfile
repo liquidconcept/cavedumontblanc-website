@@ -1,19 +1,21 @@
 # encoding: utf-8
 source "http://rubygems.org"
 
-gem 'rack', '1.2.1'
+gem 'rack', '1.4.1'
 gem 'nanoc'
 gem 'sinatra'
 gem 'yuicompressor'
 
+gem 'sass', '3.2.1'
 gem 'compass'
 
-gem 'guard',            :group => [:development, :test]
-gem 'guard-nanoc',      :group => [:development, :test]
-gem 'guard-bundler',    :group => [:development, :test]
-gem 'guard-rspec',      :group => [:development, :test]
-gem 'livereload',       :group => [:development, :test]
-gem 'guard-livereload', :group => [:development, :test]
+group :guard do
+  gem 'rb-fsevent'
+  gem 'guard'
 
-gem 'rspec',            :group => [:development, :test]
-gem 'rack-test',        :group => [:test]
+  gem 'guard-bundler'
+
+  gem 'livereload'
+  gem 'guard-livereload'
+end
+
