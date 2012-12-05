@@ -13,6 +13,7 @@ $white: #FFF;
 $dark_grey: #393939;
 $dark_blue: #212A45;
 $red: #861C30;
+$green: #3A7C1A;
 
 /*----------------------------------------*/
 /*                MIXINS                  */
@@ -98,6 +99,33 @@ body {
     border-width: 0px; 
   }
 
+  input, input:focus {
+    border: 1px solid $grey;
+  }
+
+  .ui-state-error {
+    border: 1px solid $red;
+    padding: 1px;
+    background-color: $white;
+
+    &:focus {
+      border: 1px solid $grey;
+    }
+
+    + span {
+      color: $red;
+    }
+  }
+
+  .ui-state-valid {
+    border: 1px solid $green;
+    padding: 1px;
+    background-color: $white;
+
+    + span {
+      color: $green;
+    }
+  }
 }
   
 /*----------------------------------------*/
@@ -259,28 +287,36 @@ header.content {
     float: left;
     position:relative;
 
+    #border-box {
+      @include box-sizing(border-box);
+    }
+
     .name {
-      width: 40%;
+      width: 176px; 
+      margin-bottom: 4px;
     }
 
     .address {
-      width: 82.5%;
+      width: 356px;
+      margin-bottom: 4px;
     } 
 
     .code {
-      width: 25%;
+      width: 90px;
+      margin-bottom: 4px;
     }
 
     .city {
-      width: 55%;
+      width: 262px;
+      margin-bottom: 4px;
     }
 
     .phone {
-      width: 40%
+      width: 176px;
     }
 
     .email {
-      width: 40%;
+      width: 176px;
     }
 
     [name=delivery_address_fields] {
@@ -367,6 +403,10 @@ header.content {
         position: absolute;
         bottom: 0px;
         left: 0px;
+
+        span {
+          font-size: 0.9em; 
+        }
       }
 
       .submit {

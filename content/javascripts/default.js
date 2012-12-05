@@ -122,6 +122,13 @@
     }
   });
 
+  // Validation
+  var initValidation = function() {
+    $('#command form').h5Validate({
+      keyup: true
+    });
+  }
+
   // init
   $(function() {
     // slider
@@ -130,6 +137,12 @@
 
     $('#delivery_address').change(function() {
       $('#delivery_address_fields').fadeToggle("fast", "swing");
-    }); 
+      $('#delivery_address_fields input').attr("required", function(index, attr) {
+        return !attr;
+      });
+      initValidation();
+    });
+
+    initValidation();
   });
 })(jQuery);
