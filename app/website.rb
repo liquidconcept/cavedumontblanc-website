@@ -11,7 +11,7 @@ module Application
 
     # Contact form
     post '/command' do
-      template = ERB.new(File.read(File.expand_path('../templates/command_email.text.erb', __FILE__)))
+      template = ERB.new(File.read(File.expand_path('../templates/command_email.text.erb', __FILE__), :encoding => 'UTF-8'))
 
       Pony.mail(
         :from     => params[:email],
