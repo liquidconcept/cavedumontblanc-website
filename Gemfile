@@ -14,6 +14,11 @@ gem 'uglifier'
 gem 'libv8', '~> 3.11.8'
 gem 'therubyracer'
 
+group :development do
+  gem 'capistrano'
+  gem 'railsless-deploy'
+end
+
 group :guard do
   gem 'rb-fsevent'
   gem 'guard'
