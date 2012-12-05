@@ -7,7 +7,7 @@
   <h1>Promotions</h1>
   <section class="slider_balls">
     <% wines.each_with_index do |item, index| %>
-      <a href="#" class="balls item_<%= index %>"></a>
+      <a href="#" class="balls item_<%= index %><%= index == (wines.size - 1) ? ' active' : nil %>"></a>
     <% end %>
   </section>
   <section class="items">
@@ -48,7 +48,7 @@
         <input type="phone" name="phone" placeholder="Téléphone" class="phone">
         <input type="email" name="email" placeholder="Email" class="email"><br />
       </fieldset>
-      <label><input type="checkbox" name="delivery_address" value="address_delevery" checked>Cette adresse est mon adresse de livraison</label>
+      <label><input type="checkbox" name="delivery_address" value="delivery_address" checked>Cette adresse est mon adresse de livraison</label>
       <fieldset name="delivery_address_fields">
         <input type="text" name="firstname" placeholder="Prénom" class="name">
         <input type="text" name="lastname" placeholder="Nom" class="name">
