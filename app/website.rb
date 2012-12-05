@@ -14,7 +14,7 @@ module Application
       template = ERB.new(File.read(File.expand_path('../templates/command_email.text.erb', __FILE__), :encoding => 'UTF-8'))
 
       Pony.mail(
-        :from     => params[:email],
+        :from     => params[:bild_address][:email],
         :to       => COMMAND_EMAIL_TO,
         :charset  => 'utf-8',
         :subject  => COMMAND_SUBJECT,
