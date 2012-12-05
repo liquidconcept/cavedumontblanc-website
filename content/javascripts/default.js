@@ -127,5 +127,9 @@
     // slider
     var slider = window.slider = new Slider();
     slider.start();
+
+    $('#delivery_address').change(function() {
+      $('#delivery_address_fields').fadeToggle("fast", "swing");
+    }); 
   });
 })(jQuery);
