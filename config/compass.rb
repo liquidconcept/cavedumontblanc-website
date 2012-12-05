@@ -2,20 +2,13 @@
 # Require any additional compass plugins here.
 # Set this to the root of your project when deployed:
 
-project_path    = '.'
+project_path          = '.'
 
 http_path             = '/'
-http_stylesheets_path = "/stylesheets"
-http_javascripts_path = "/stylesheets"
-http_images_path      = "/images"
+http_stylesheets_path = '/assets/stylesheets'
+http_javascripts_path = '/assets/javascripts'
+http_images_path      = '/assets/images'
+http_fonts_path       = '/assets/fonts'
 
-css_dir         = 'public/stylesheets'
-sass_dir        = 'content/stylesheets'
-images_dir      = 'content/images'
-javascripts_dir = 'content/javascripts'
+images_dir            = 'content/assets/images'
 
-output_style    = production? ? :compressed : :nested
-
-sass_options = {
-  :syntax => :scss
-}

@@ -1,0 +1,506 @@
+@import "compass/reset";
+@import "compass/css3";
+@import "compass/typography/text/replacement";
+
+@import url(http://fonts.googleapis.com/css?family=Questrial);
+
+/*----------------------------------------*/
+/*                 COLOR                  */
+/*----------------------------------------*/ 
+
+$grey: #A6A6A6;
+$white: #FFF;
+$dark_grey: #393939;
+$dark_blue: #212A45;
+$red: #861C30;
+$light_red: lighten($red, 60%);
+$green: #3A7C1A;
+
+/*----------------------------------------*/
+/*                MIXINS                  */
+/*----------------------------------------*/
+
+@mixin disable-box($disable_image) {
+  &.disable {
+    * {
+      @include opacity(0.6);
+    }
+
+    [disabled] {
+      @include opacity(1);
+    }
+
+    .out_of_stock {
+      @include opacity(1);
+      width: image-width($disable_image);
+      height: image-height($disable_image);
+      position: absolute;
+      top: 0px;
+      left: 50%;
+      margin-left: -(image-width($disable_image) / 2);
+      display: block;
+      background: inline-image($disable_image) top no-repeat;
+      z-index: 10;
+    }
+  }
+}
+
+/*----------------------------------------*/
+/*                OVERLAY                 */
+/*----------------------------------------*/
+
+.overlay {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10000;
+
+  * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    &.background {
+      background: $grey;
+      @include opacity(0.2);
+    }
+
+    &.loader {
+      background: inline-image('loader.gif') center no-repeat;
+    }
+  }
+
+}
+
+/*----------------------------------------*/
+/*                DEFAULT                 */
+/*----------------------------------------*/ 
+
+body {
+
+  h1 {
+    font-size: 2.5em;
+    color: $dark_grey;
+    font-family: 'Questrial', sans-serif;
+  }
+
+  h3 {
+    font-size: 1.8em;
+    color: $dark_grey;
+    font-family: 'Questrial', sans-serif;
+  }
+
+  h4 {
+    font-size: 1.2em;
+    color: $dark_grey;
+    font-family: 'Questrial', sans-serif;
+    margin-bottom: 10px;
+  }
+
+  p, legend {
+    font-family: 'Questrial', sans-serif;
+    color: $dark_grey;
+    text-align: justify;
+  }
+
+  a {
+    font-family: 'Questrial', sans-serif;
+    color: $dark_grey;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: $red;
+  }
+
+  span, label {
+    font-family: 'Questrial', sans-serif;
+    font-size: 0.8em; 
+    color: $dark_grey;
+    text-align: justify;
+  }
+
+  .clearboth {
+    width: 0px;
+    height: 0px;
+    clear: both;
+    border-width: 0px; 
+  }
+
+  input, input:focus {
+    border: 1px solid $grey;
+  }
+
+  .ui-state-error {
+    border: 1px solid $red;
+    padding: 1px;
+    background-color: $light_red;
+
+    &:focus {
+      background-color: $white;
+      border: 1px solid $grey;
+    }
+
+    + span {
+      color: $red;
+      text-decoration: underline;
+    }
+  }
+
+  .ui-state-valid {
+    border: 1px solid $green;
+    padding: 1px;
+    background-color: $white;
+
+    + span {
+      color: $green;
+    }
+  }
+}
+
+/*----------------------------------------*/
+/*                  MAIN                  */
+/*----------------------------------------*/ 
+
+section.main {
+  width: 960px;
+  margin: 0 auto;
+
+  header.main {
+    h1 {
+      @include replace-text-with-dimensions('logo_cave_du_mont-blanc.png', 50%, 50%, true);
+      float: left;
+      margin: 10px 0;
+    }
+  }
+  nav {
+    margin: 10px 0px 10px 0px;
+
+    ul {
+      float: right;
+      margin-top: 10px;
+
+      li {
+        display: inline;
+      }
+    }
+  }
+}
+
+/*----------------------------------------*/
+/*             CONTENT HEADER             */
+/*----------------------------------------*/
+
+header.content {
+  $padding-top: 100px;
+  height: image-height('wine_header.jpg') - $padding-top;
+  border-top: 1px solid $grey;
+  background: inline-image('wine_header.jpg') bottom right no-repeat;
+  padding: $padding-top 0 0 20px;
+
+  legend {
+    font-size: 1.3em;
+  }
+}
+
+/*----------------------------------------*/
+/*              PROMOTIONS                */
+/*----------------------------------------*/
+
+#promotions {
+  display: block;
+  height: 379px;
+  padding: 20px 20px 0px 20px;
+  border-top: 1px solid $grey;
+  overflow: hidden;
+
+  .slider_balls {
+    .balls {
+      width: 10px;
+      height: 10px;
+      float: right;
+      margin-right: 10px;
+      background-color: $grey;
+      @include border-radius(5px, 5px);
+
+      &.active, &:hover {
+        background-color: $dark_grey;
+      }
+    } 
+  }
+
+  .items {
+    position: relative;
+    display: block;
+  }
+
+  .item {
+    position: absolute;
+    background-color: white;
+    top: 0px;
+    left: 0px;
+    height: 379px;
+    width: 100%;
+    display: block;
+    margin-top: 30px;
+
+    .info {
+      width: 550px;
+      float: left;
+
+      h3 {
+        color: $red;
+      }
+
+      .description {
+        font-size: 1.2em;
+        margin-top: 8px;
+      }
+
+      .grape {
+        font-size: 1em;
+        margin-top: 8px;
+      }
+    }
+
+    .price_container {
+      width: 150px;
+      position: relative;
+      float: right;
+      padding-top: 20px;
+      padding-right: 10px;
+
+      &.bottles {
+        border-right: 1px solid $grey; 
+      }
+
+      p {
+        font-size: 1.2em;
+        text-align: center;
+        margin-bottom: 5px;
+      }
+
+      .price {
+        color: $red;
+      }
+
+      @include disable-box('disable.png');
+    }
+
+    .bottle {
+      position: absolute;
+      bottom: -40px;
+      left: 0px;
+    } 
+  }
+}
+
+/*----------------------------------------*/
+/*                COMMAND                 */
+/*----------------------------------------*/
+
+#command {
+  height: 479px;
+  padding: 20px 20px 0px 20px;
+  border-top: 1px solid $grey;
+
+  h3 {
+    width: 300px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  #address {
+    width: 48%;
+    height: 410px;
+    float: left;
+    position:relative;
+
+    #border-box {
+      @include box-sizing(border-box);
+    }
+
+    .name {
+      width: 176px; 
+      margin-bottom: 4px;
+    }
+
+    .address {
+      width: 356px;
+      margin-bottom: 4px;
+    } 
+
+    .code {
+      width: 90px;
+      margin-bottom: 4px;
+    }
+
+    .city {
+      width: 262px;
+      margin-bottom: 4px;
+    }
+
+    .phone {
+      width: 176px;
+    }
+
+    .email {
+      width: 176px;
+    }
+
+    [name=delivery_address_fields] {
+      display: none;
+    }
+
+    #condition {
+      margin-top: 30px;
+      position: absolute;
+      bottom: 0px;
+
+      p {
+        font-size: 0.8em;
+        padding-right: 20px;
+      }
+    }
+  }
+
+  #order_form {
+    width: 48%;
+    float: right;
+    padding-left: 20px;
+    border-left: 1px solid $grey;
+
+    article {
+      width: 100%;
+      clear: both;
+
+      > img {
+        display: block;
+        float: left;
+      }
+
+      .info {
+        display: block;
+        float: left;
+        height: 50px;
+        margin-bottom: 10px;
+
+        .name {
+          font-size: 1.2em; 
+          color: $red;
+        } 
+
+        span {
+          float: left;
+          margin-left: 20px;
+          font-size:  0.7em;
+          word-wrap: break-word;
+        }
+      }
+
+      .price_container {
+        display: block;
+        float: right;
+        margin-left: 10px;
+        position: relative;
+
+        span {
+          display: block;
+          width: 100%;
+          font-size: 0.7em;
+          line-height: 15px;
+        } 
+
+        .price {
+          color: $red;
+        }
+
+        .field {
+          width: 60px;
+        }
+
+        @include disable-box('min_disable.png');
+      }
+    }
+
+    .buttons {
+      position: relative;
+      clear: both;
+      height: 50px;
+
+      .agree {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+
+        span {
+          font-size: 0.9em; 
+        }
+      }
+
+      .submit {
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        width: 143px;
+        height: 30px;
+        color: $white;
+        background-color: $red;
+        border: 1px solid $grey;
+      }
+    }
+  }
+
+  &.success {
+    p {
+      display: block;
+      margin: 100px auto 0px auto;
+      text-align: center;
+      font-size: 2em;
+    }
+  }
+}
+
+/*----------------------------------------*/
+/*                CONTACT                 */
+/*----------------------------------------*/
+
+#contact {
+  height: 379px;
+  padding: 20px 20px 0px 20px;
+  border-top: 1px solid $grey;
+
+  #info_contact {
+    width: 430px;
+    margin-top: 20px;
+    float: left;
+  }
+
+  #google_map {
+    height: 300px;
+    margin-top: 20px;
+    overflow: hidden;
+    float: right;
+  }
+}
+
+/*----------------------------------------*/
+/*                 FOOTER                 */
+/*----------------------------------------*/
+
+footer {
+  height: 50px;
+  padding: 20px 20px 0px 20px;
+  border-top: 1px solid $grey;
+
+  p {
+    width: 550px;
+    font-size: 0.8em;
+    margin: 0 auto;
+  }
+}

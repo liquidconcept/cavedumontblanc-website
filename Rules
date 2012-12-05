@@ -1,15 +1,33 @@
 #!/usr/bin/env ruby
 
+require File.expand_path('../config/nanoc', __FILE__)
+
 ############ Compile ############
-compile '/images/*/' do
+
+compile '/assets/stylesheets/*/' do
+  filter :sprockets, {
+    :css_compressor => Nanoc.production? ? :scss : nil
+  }
 end
 
-compile '/assets/stylesheets/application/' do
-  filter :sprockets
+compile '/assets/stylesheets/*/', :rep => :gzip do
+  filter :sprockets, {
+    :css_compressor => Nanoc.production? ? :scss : nil
+  }
+  filter :gzip
 end
 
-compile '/assets/javascripts/application/' do
-  filter :sprockets
+compile '/assets/javascripts/*/' do
+  filter :sprockets, {
+    :js_compressor => Nanoc.production? ? :uglifier : nil
+  }
+end
+
+compile '/assets/javascripts/*/', :rep => :gzip do
+  filter :sprockets, {
+    :js_compressor => Nanoc.production? ? :uglifier : nil
+  }
+  filter :gzip
 end
 
 compile '*' do
@@ -22,16 +40,15 @@ compile '*' do
 end
 
 ############ Route ############
-route '/images/' do
-  item.identifier.chop + '.' + item[:extension]
+
+route '/assets/*/' do
+  filename = File.basename(item[:filename]).gsub(/^(\w+\.\w+).*/, '\1')
+  Nanoc::Helpers.asset_path(filename)
 end
 
-route '/assets/stylesheets/application/' do
-  '/assets/application.css'
-end
-
-route '/assets/javascripts/application/' do
-  '/assets/application.js'
+route '/assets/*/', :rep => :gzip do
+  filename = File.basename(item[:filename]).gsub(/^(\w+\.\w+).*/, '\1')
+  Nanoc::Helpers.asset_path(filename) + '.gz'
 end
 
 route '/htaccess/' do
@@ -47,5 +64,6 @@ route '*' do
 end
 
 ############ Layout ############
+
 layout '*', :erb
 

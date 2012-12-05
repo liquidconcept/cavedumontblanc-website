@@ -8,6 +8,7 @@ gem 'pony'
 
 gem 'sprockets'
 gem 'sprockets-sass'
+gem 'sprockets-helpers'
 gem 'sass'
 gem 'compass'
 gem 'uglifier'
