@@ -5,6 +5,11 @@
 <a id="anchor_promo"></a>
 <article id="promotions">
   <h1>Promotions</h1>
+  <section class="slider_balls">
+    <% wines.each_with_index do |item, index| %>
+      <a href="#" class="balls item_<%= index %>"></a>
+    <% end %>
+  </section>
   <section class="items">
     <% wines.each_with_index do |item, index| %>
       <article class="item item_<%= index %>">

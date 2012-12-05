@@ -25,6 +25,18 @@
       // show only first item
       $(this.items).hide().first().show();
 
+      // bind balls click
+      var that = this;
+      $('#promotions .balls').on('click', function(event) {
+        event.preventDefault();
+
+        var index = Math.abs($(this).siblings().andSelf().index(this) - $(this).siblings().andSelf().length + 1);
+
+        var next_item = $('#promotions article.item').slice(index, index + 1);
+
+        that.moveTo(next_item);
+      });
+
       // bind
       _.bindAll(this);
     },
@@ -69,6 +81,9 @@
         if (nextItem.length === 0) {
           nextItem = $(this.items).first();
         }
+      } else if (nextItem.is(':visible')) {
+        this._activeSlide = false;
+        return;
       } else {
         nextItem = $(nextItem);
       }
