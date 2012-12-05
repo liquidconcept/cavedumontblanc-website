@@ -1,0 +1,35 @@
+# encoding: UTF-8
+<% params[:delivery_address] = params[:bild_address] if params[:delivery_address_same_bild] == 'true' %>
+
+Contact et adresse de facturation
+=================================
+
+Nom : <%= params[:bild_address][:lastname] %>
+Prénom : <%= params[:bild_address][:firstname] %>
+Adresse : <%= params[:bild_address][:address] %>
+Code postal : <%= params[:bild_address][:code] %>
+Ville : <%= params[:bild_address][:city] %>
+Téléphone : <%= params[:bild_address][:phone] %>
+Email : <%= params[:bild_address][:email] %>
+
+Adresse de livraison
+====================
+
+Nom : <%= params[:delivery_address][:lastname] %>
+Prénom : <%= params[:delivery_address][:firstname] %>
+Adresse : <%= params[:delivery_address][:address] %>
+Code postal : <%= params[:delivery_address][:code] %>
+Ville : <%= params[:delivery_address][:city] %>
+
+Commande
+========
+
+Bouteille(s) :
+<% params[:bottle].select {|name, qty| qty.to_i > 0 }.each do |name, qty| %>
+* <%= name %> : <%= qty %>
+<% end %>
+
+Caisse(s) : 
+<% params[:box].select {|name, qty| qty.to_i > 0 }.each do |name, qty| %>
+* <%= name %> : <%= qty %>
+<% end %>

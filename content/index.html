@@ -35,26 +35,26 @@
 </article>
 <a id="anchor_command"></a>
 <article id="command">
-  <form action="#" method="post">
+  <form method="post" action="/command">
     <h1>Commander</h1>
     <div id="address">
       <h3>Vos informations</h3>
       <fieldset name="bild_address_fields">
-        <input type="text" name="firstname" placeholder="Prénom" class="name" id="border-box" required>
-        <input type="text" name="lastname" placeholder="Nom" class="name" id="border-box" required>
-        <input type="text" name="address" placeholder="Adresse" class="address" id="border-box" required>
-        <input type="text" name="code" placeholder="Code Postal" class="code" id="border-box" required>
-        <input type="text" name="city" placeholder="Ville" class="city" id="border-box" required>
-        <input type="phone" name="phone" placeholder="Téléphone" class="phone h5-phone" id="border-box" required>
-        <input type="email" name="email" placeholder="Email" class="email h5-email" id="border-box" required><br />
+        <input type="text" name="bild_address[firstname]" placeholder="Prénom" class="name" id="border-box" required>
+        <input type="text" name="bild_address[lastname]" placeholder="Nom" class="name" id="border-box" required>
+        <input type="text" name="bild_address[address]" placeholder="Adresse" class="address" id="border-box" required>
+        <input type="text" name="bild_address[code]" placeholder="Code Postal" class="code" id="border-box" required>
+        <input type="text" name="bild_address[city]" placeholder="Ville" class="city" id="border-box" required>
+        <input type="phone" name="bild_address[phone]" placeholder="Téléphone" class="phone h5-phone" id="border-box" required>
+        <input type="email" name="bild_address[email]" placeholder="Email" class="email h5-email" id="border-box" required><br />
       </fieldset>
-      <label><input type="checkbox" name="delivery_address" value="delivery_address" id="delivery_address" checked>Cette adresse est mon adresse de livraison</label>
+      <label><input type="checkbox" name="delivery_address_same_bild" value="true" id="delivery_address" checked>Cette adresse est mon adresse de livraison</label>
       <fieldset name="delivery_address_fields" id="delivery_address_fields">
-        <input type="text" name="firstname" placeholder="Prénom" class="name" id="border-box">
-        <input type="text" name="lastname" placeholder="Nom" class="name" id="border-box">
-        <input type="text" name="address" placeholder="Adresse" class="address" id="border-box">
-        <input type="text" name="code" placeholder="Code Postal" class="code" id="border-box">
-        <input type="text" name="city" placeholder="Ville" class="city" id="border-box">
+        <input type="text" name="delivery_address[firstname]" placeholder="Prénom" class="name" id="border-box">
+        <input type="text" name="delivery_address[lastname]" placeholder="Nom" class="name" id="border-box">
+        <input type="text" name="delivery_address[address]" placeholder="Adresse" class="address" id="border-box">
+        <input type="text" name="delivery_address[code]" placeholder="Code Postal" class="code" id="border-box">
+        <input type="text" name="delivery_address[city]" placeholder="Ville" class="city" id="border-box">
       </fieldset>
       <div id="condition">
         <h4>Conditions Générales de Vente</h4>
@@ -74,13 +74,13 @@
             <div class="price_container boxes<%= item[:stock_box] ? nil : ' disable' %>">
               <span class="label">Caisse</span>
               <span class="price"><%= item[:price_box] || '&nbsp;' %></span>
-              <input type="number" name="bottle" placeholder="Qte" class="field"<%= item[:stock_box] ? nil : ' disabled' %>>
+              <input type="number" name="box[<%= item[:name] %>]" placeholder="Qte" class="field"<%= item[:stock_box] ? nil : ' disabled' %>>
               <div class="out_of_stock"></div>
             </div>
             <div class="price_container bottles <%= item[:stock_bottle] ? nil : ' disable' %>">
               <span class="label">Bouteille</span>
               <span class="price"><%= item[:price_bottle] || '&nbsp;' %></span>
-              <input type="number" name="bottle" placeholder="Qte" class="field"<%= item[:stock_bottle] ? nil : ' disabled' %>>
+              <input type="number" name="bottle[<%= item[:name] %>]" placeholder="Qte" class="field"<%= item[:stock_bottle] ? nil : ' disabled' %>>
               <div class="out_of_stock"></div>
             </div>
           </article>

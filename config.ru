@@ -9,11 +9,6 @@ require 'sinatra/base'
 #
 # APPLICATION
 #
-module Application
-  class Website < Sinatra::Base
-    set :static, true
-    set :public, File.expand_path('../../public', __FILE__)
-  end
-end
+require 'app/website'
 
 run Application::Website.new
