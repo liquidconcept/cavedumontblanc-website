@@ -15,11 +15,13 @@ module Application
 
       Pony.mail(
         :from     => params[:email],
-        :to       => CONTACT_EMAIL_TO,
+        :to       => COMMAND_EMAIL_TO,
         :charset  => 'utf-8',
-        :subject  => CONTACT_SUBJECT_PREFIX,
+        :subject  => COMMAND_SUBJECT,
         :body     => template.result(binding)
       )
+
+      'ok'
     end
   end
 end

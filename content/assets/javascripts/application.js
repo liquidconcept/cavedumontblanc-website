@@ -127,9 +127,23 @@
     }
   });
 
+  // Overlay
+  var overlayToggle = window.overlayToggle = function(el) {
+    el = $(el);
+    if (el.has('.overlay').length === 0) {
+      el.css('position', 'relative');
+      $('<div class="overlay"><div class="background" /><div class="loader" /></div>').appendTo(el).fadeIn();
+    } else {
+      el.children('.overlay').fadeOut(function() {
+        $(this).remove();
+      });
+    }
+  }
+
   // Validation
   var initValidation = function() {
     $('#command form').h5Validate({
+      submit: false, // performed by custom handler
       keyup: true
     });
   }
@@ -140,6 +154,7 @@
     var slider = window.slider = new Slider();
     slider.start();
 
+    // validation
     $('#delivery_address').change(function() {
       $('#delivery_address_fields').fadeToggle("fast", "swing");
       $('#delivery_address_fields input').attr("required", function(index, attr) {
@@ -149,5 +164,37 @@
     });
 
     initValidation();
+
+    // send form
+    $('#command form').on('submit', function(event) {
+      event.preventDefault();
+
+      // check validity
+      var allValid = $(this).h5Validate('allValid', { revalidate: true });
+      if(allValid !== true) {
+        return;
+      }
+
+      // display overlay
+      overlayToggle($('#command'));
+
+      // send command
+      $.ajax({
+        type: 'POST',
+        url: $(this).attr('action'),
+        data: $(this).serialize(),
+        success: function(data, status, xhr) {
+          $('#command form').fadeOut(function() {
+            $('#command ').addClass('success');
+            $('<p>Commande envoyée avec succès</p>').hide().appendTo($('#command')).fadeIn();
+            overlayToggle($('#command'));
+          });
+        },
+        error: function(xhr, status, error) {
+          overlayToggle($('#command'));
+        },
+        dataType: 'text'
+      });
+    });
   });
 })(jQuery);

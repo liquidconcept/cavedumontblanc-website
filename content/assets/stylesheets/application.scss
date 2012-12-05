@@ -13,6 +13,7 @@ $white: #FFF;
 $dark_grey: #393939;
 $dark_blue: #212A45;
 $red: #861C30;
+$light_red: lighten($red, 60%);
 $green: #3A7C1A;
 
 /*----------------------------------------*/
@@ -41,7 +42,39 @@ $green: #3A7C1A;
       background: inline-image($disable_image) top no-repeat;
       z-index: 10;
     }
-  } 
+  }
+}
+
+/*----------------------------------------*/
+/*                OVERLAY                 */
+/*----------------------------------------*/
+
+.overlay {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10000;
+
+  * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    &.background {
+      background: $grey;
+      @include opacity(0.2);
+    }
+
+    &.loader {
+      background: inline-image('loader.gif') center no-repeat;
+    }
+  }
+
 }
 
 /*----------------------------------------*/
@@ -106,9 +139,10 @@ body {
   .ui-state-error {
     border: 1px solid $red;
     padding: 1px;
-    background-color: $white;
+    background-color: $light_red;
 
     &:focus {
+      background-color: $white;
       border: 1px solid $grey;
     }
 
@@ -127,7 +161,7 @@ body {
     }
   }
 }
-  
+
 /*----------------------------------------*/
 /*                  MAIN                  */
 /*----------------------------------------*/ 
@@ -145,7 +179,6 @@ section.main {
   }
   nav {
     margin: 10px 0px 10px 0px;
-    
 
     ul {
       float: right;
@@ -154,7 +187,7 @@ section.main {
       li {
         display: inline;
       }
-    }           
+    }
   }
 }
 
@@ -177,7 +210,7 @@ header.content {
 /*----------------------------------------*/
 /*              PROMOTIONS                */
 /*----------------------------------------*/
-  
+
 #promotions {
   display: block;
   height: 379px;
@@ -419,6 +452,15 @@ header.content {
         background-color: $red;
         border: 1px solid $grey;
       }
+    }
+  }
+
+  &.success {
+    p {
+      display: block;
+      margin: 100px auto 0px auto;
+      text-align: center;
+      font-size: 2em;
     }
   }
 }
