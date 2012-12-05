@@ -14,7 +14,7 @@ sass_dir        = 'content/stylesheets'
 images_dir      = 'content/images'
 javascripts_dir = 'content/javascripts'
 
-output_style    = :nested
+output_style    = production? ? :compressed : :nested
 
 sass_options = {
   :syntax => :scss

@@ -4,11 +4,15 @@ source "http://rubygems.org"
 gem 'rack', '1.4.1'
 gem 'nanoc'
 gem 'sinatra'
-gem 'yuicompressor'
 gem 'pony'
 
-gem 'sass', '3.2.1'
+gem 'sprockets'
+gem 'sprockets-sass'
+gem 'sass'
 gem 'compass'
+gem 'uglifier'
+gem 'libv8', '~> 3.11.8'
+gem 'therubyracer'
 
 group :guard do
   gem 'rb-fsevent'

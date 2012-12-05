@@ -1,33 +1,15 @@
 #!/usr/bin/env ruby
 
-# A few helpful tips about the Rules file:
-#
-# * The string given to #compile and #route are matching patterns for
-#   identifiers--not for paths. Therefore, you can’t match on extension.
-#
-# * The order of rules is important: for each item, only the first matching
-#   rule is applied.
-#
-# * Item identifiers start and end with a slash (e.g. “/about/” for the file
-#   “content/about.html”). To select all children, grandchildren, … of an
-#   item, use the pattern “/about/*/”; “/about/*” will also select the parent,
-#   because “*” matches zero or more characters.
-
-############ Compass ############
-require 'compass'
-Compass.add_project_configuration 'config/compass.rb'
-
 ############ Compile ############
 compile '/images/*/' do
 end
 
-compile '/stylesheets/*/' do
-  filter :sass, Compass.sass_engine_options
-  filter :yui_compressor, :type => 'css' if ENV['RACK_ENV'] == 'production'
+compile '/assets/stylesheets/application/' do
+  filter :sprockets
 end
 
-compile '/javascripts/*/' do
-  filter :yui_compressor, :type => 'js' if ENV['RACK_ENV'] == 'production'
+compile '/assets/javascripts/application/' do
+  filter :sprockets
 end
 
 compile '*' do
@@ -44,15 +26,12 @@ route '/images/' do
   item.identifier.chop + '.' + item[:extension]
 end
 
-route '/stylesheets/_*/' do
+route '/assets/stylesheets/application/' do
+  '/assets/application.css'
 end
 
-route '/stylesheets/*/' do
-  item.identifier.chop + '.css'
-end
-
-route '/javascript/*/' do
-  item.identifier.chop + '.js'
+route '/assets/javascripts/application/' do
+  '/assets/application.js'
 end
 
 route '/htaccess/' do

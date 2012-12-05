@@ -1,3 +1,8 @@
+// =require jquery
+// =require jquery-ui
+// =require jquery.h5validate
+// =require underscore
+
 (function($, undefined) {
 
   /* Slider class */
