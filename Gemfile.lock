@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/yannlugrin/nanoc-sprockets-filter.git
+  revision: e21286e63e4ace5691ed97214805e14499dc1a07
+  specs:
+    nanoc-sprockets-filter (0.0.1)
+      nanoc (>= 3.4.0)
+      sprockets (>= 2.8.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -116,6 +124,7 @@ DEPENDENCIES
   libv8 (~> 3.11.8)
   livereload
   nanoc
+  nanoc-sprockets-filter!
   pony
   rack (= 1.4.1)
   railsless-deploy

@@ -4,27 +4,16 @@ require File.expand_path('../config/nanoc', __FILE__)
 
 ############ Compile ############
 
-compile '/assets/stylesheets/*/' do
+compile %r{/assets/(stylesheets|javascripts)/.+/} do
   filter :sprockets, {
-    :css_compressor => Nanoc.production? ? :scss : nil
-  }
-end
-
-compile '/assets/stylesheets/*/', :rep => :gzip do
-  filter :sprockets, {
-    :css_compressor => Nanoc.production? ? :scss : nil
-  }
-  filter :gzip
-end
-
-compile '/assets/javascripts/*/' do
-  filter :sprockets, {
+    :css_compressor => Nanoc.production? ? :scss : nil,
     :js_compressor => Nanoc.production? ? :uglifier : nil
   }
 end
 
-compile '/assets/javascripts/*/', :rep => :gzip do
+compile %r{/assets/(stylesheets|javascripts)/.+/}, :rep => :gzip do
   filter :sprockets, {
+    :css_compressor => Nanoc.production? ? :scss : nil,
     :js_compressor => Nanoc.production? ? :uglifier : nil
   }
   filter :gzip
@@ -43,12 +32,12 @@ end
 
 route '/assets/*/' do
   filename = File.basename(item[:filename]).gsub(/^(\w+\.\w+).*/, '\1')
-  Nanoc::Helpers.asset_path(filename)
+  Sprockets::Helpers.asset_path(filename)
 end
 
 route '/assets/*/', :rep => :gzip do
   filename = File.basename(item[:filename]).gsub(/^(\w+\.\w+).*/, '\1')
-  Nanoc::Helpers.asset_path(filename) + '.gz'
+  Sprockets::Helpers.asset_path(filename) + '.gz'
 end
 
 route '/htaccess/' do

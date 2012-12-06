@@ -10,7 +10,7 @@ require 'sprockets-helpers'
 require 'sass'
 require 'uglifier'
 require 'compass'
-require 'vendor/filters/sprockets'
+require 'nanoc/filters/sprockets'
 require 'vendor/filters/gzip'
 
 #
@@ -26,6 +26,13 @@ Sprockets::Helpers.configure do |config|
   config.prefix      = '/assets'
   config.digest      = true
 end
+
+# Fix bug with Sprockets namespace
+module Sprockets
+  module Sass
+    Engine = ::Sass::Engine
+  end
+end if defined? ::Sass::Engine
 
 #
 # Nanoc

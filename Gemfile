@@ -14,6 +14,7 @@ gem 'compass'
 gem 'uglifier'
 gem 'libv8', '~> 3.11.8'
 gem 'therubyracer'
+gem 'nanoc-sprockets-filter', :git => 'git://github.com/yannlugrin/nanoc-sprockets-filter.git'
 
 group :development do
   gem 'capistrano'
