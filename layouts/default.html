@@ -23,6 +23,9 @@
         <%= yield %>
       </section>
     </section>
+    <script type="text/javascript">
+      $('input[placeholder]').placeholder();
+    </script>
     <% if production? %>
       <script type="text/javascript">
         var _gaq = _gaq || [];

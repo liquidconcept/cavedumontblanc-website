@@ -2,6 +2,7 @@
 // =require jquery-ui
 // =require jquery.h5validate
 // =require underscore
+// =require jquery-placeholder
 
 (function($, undefined) {
 
