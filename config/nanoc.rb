@@ -10,7 +10,7 @@ require 'sass'
 require 'uglifier'
 require 'compass'
 require 'nanoc-sprockets-filter'
-require 'vendor/filters/gzip'
+require 'nanoc-gzip-filter'
 
 #
 # Compass

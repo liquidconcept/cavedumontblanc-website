@@ -57,6 +57,8 @@ GEM
     multi_json (1.4.0)
     nanoc (3.4.3)
       cri (~> 2.2)
+    nanoc-gzip-filter (0.0.1)
+      nanoc (>= 3.4.0)
     nanoc-sprockets-filter (0.0.2)
       nanoc (>= 3.4.0)
       sprockets (>= 2.8.0)
@@ -119,6 +121,7 @@ DEPENDENCIES
   libv8 (~> 3.11.8)
   livereload
   nanoc
+  nanoc-gzip-filter
   nanoc-sprockets-filter
   pony
   rack (= 1.4.1)

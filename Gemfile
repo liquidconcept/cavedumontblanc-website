@@ -15,6 +15,7 @@ gem 'uglifier'
 gem 'libv8', '~> 3.11.8'
 gem 'therubyracer'
 gem 'nanoc-sprockets-filter'
+gem 'nanoc-gzip-filter'
 
 group :development do
   gem 'capistrano'
