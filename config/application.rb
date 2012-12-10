@@ -3,6 +3,6 @@
 #
 # COMMAND
 #
-COMMAND_EMAIL_TO = 'yann.lugrin@liquid-concept.ch'
+COMMAND_EMAIL_TO = 'cavedumontblanc@citycable.ch'
 COMMAND_SUBJECT  = 'Commande depuis le site Cave du Mont Blanc'
 
