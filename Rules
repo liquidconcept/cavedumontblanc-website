@@ -31,13 +31,11 @@ end
 ############ Route ############
 
 route '/assets/*/' do
-  filename = File.basename(item[:filename]).gsub(/^(\w+\.\w+).*/, '\1')
-  Sprockets::Helpers.asset_path(filename)
+  Nanoc::Helpers::Sprockets.asset_path(item)
 end
 
 route '/assets/*/', :rep => :gzip do
-  filename = File.basename(item[:filename]).gsub(/^(\w+\.\w+).*/, '\1')
-  Sprockets::Helpers.asset_path(filename) + '.gz'
+  Nanoc::Helpers::Sprockets.asset_path(item) + '.gz'
 end
 
 route '/htaccess/' do

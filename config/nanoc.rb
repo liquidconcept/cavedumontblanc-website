@@ -6,11 +6,10 @@ require 'bundler/setup'
 
 require 'sprockets'
 require 'sprockets-sass'
-require 'sprockets-helpers'
 require 'sass'
 require 'uglifier'
 require 'compass'
-require 'nanoc/filters/sprockets'
+require 'nanoc-sprockets-filter'
 require 'vendor/filters/gzip'
 
 #
