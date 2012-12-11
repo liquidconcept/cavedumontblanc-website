@@ -201,5 +201,8 @@
         dataType: 'text'
       });
     });
+
+    // Placeholder plugin initialization
+    $('input[placeholder]').placeholder();
   });
 })(jQuery);

@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>La cave du Mont-Blanc - vins italiens de grand qualités - Lausanne, Montreux, Riviera</title>
-    <link rel="stylesheet" href="/assets/application.css" media="screen">
-    <script src="/assets/application.js"></script>
+    <link rel="stylesheet" href="<%= stylesheet_path 'application' %>" media="screen">
+    <script src="<%= javascript_path 'application' %>"></script>
   </head>
   <body>
     <section class="main">
@@ -23,10 +23,7 @@
         <%= yield %>
       </section>
     </section>
-    <script type="text/javascript">
-      $('input[placeholder]').placeholder();
-    </script>
-    <% if production? %>
+    <% if Nanoc.production? %>
       <script type="text/javascript">
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-2241355-18']);

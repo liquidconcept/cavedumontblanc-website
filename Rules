@@ -1,15 +1,22 @@
 #!/usr/bin/env ruby
 
+require File.expand_path('../config/nanoc', __FILE__)
+
 ############ Compile ############
-compile '/images/*/' do
+
+compile %r{/assets/(stylesheets|javascripts)/.+/} do
+  filter :sprockets, {
+    :css_compressor => Nanoc.production? ? :scss : nil,
+    :js_compressor => Nanoc.production? ? :uglifier : nil
+  }
 end
 
-compile '/assets/stylesheets/application/' do
-  filter :sprockets
-end
-
-compile '/assets/javascripts/application/' do
-  filter :sprockets
+compile %r{/assets/(stylesheets|javascripts)/.+/}, :rep => :gzip do
+  filter :sprockets, {
+    :css_compressor => Nanoc.production? ? :scss : nil,
+    :js_compressor => Nanoc.production? ? :uglifier : nil
+  }
+  filter :gzip
 end
 
 compile '*' do
@@ -22,16 +29,13 @@ compile '*' do
 end
 
 ############ Route ############
-route '/images/' do
-  item.identifier.chop + '.' + item[:extension]
+
+route '/assets/*/' do
+  Nanoc::Helpers::Sprockets.asset_path(item)
 end
 
-route '/assets/stylesheets/application/' do
-  '/assets/application.css'
-end
-
-route '/assets/javascripts/application/' do
-  '/assets/application.js'
+route '/assets/*/', :rep => :gzip do
+  Nanoc::Helpers::Sprockets.asset_path(item) + '.gz'
 end
 
 route '/htaccess/' do
@@ -47,5 +51,6 @@ route '*' do
 end
 
 ############ Layout ############
+
 layout '*', :erb
 

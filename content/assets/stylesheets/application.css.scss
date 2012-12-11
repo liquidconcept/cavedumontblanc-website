@@ -163,7 +163,7 @@ body {
   }
 
   .placeholder {
-      color: $grey;
+    color: $grey;
   }
 }
 
@@ -386,7 +386,6 @@ header.content {
       > img {
         display: block;
         float: left;
-        margin-bottom: 10px;
       }
 
       .info {
@@ -398,13 +397,12 @@ header.content {
         .name {
           font-size: 1.2em; 
           color: $red;
-          margin-left: 20px;
         } 
 
-        .description {
+        span {
           float: left;
           margin-left: 20px;
-          font-size: 0.7em;
+          font-size:  0.7em;
           word-wrap: break-word;
         }
       }
