@@ -202,6 +202,23 @@
       });
     });
 
+    // Lightbox wines initialization
+    $('article.item > img, article.item > .info, article.item .price_container').on('click', function() {
+      var item_class = $(this).parents('article.item').first().attr('class').match(/item_\d+/)[0];
+
+      $('#lightbox article.' + item_class).show();
+
+      $('#lightbox').fadeIn('fast');
+      $('#shade_lightbox').slideDown('fast');
+    });
+
+    $('#close_lightbox').on('click', function(){
+      $('#lightbox').fadeOut('fast', function() {
+        $('#lightbox article.item').hide();
+      });
+      $('#shade_lightbox').slideUp('fast');
+    });
+
     // Placeholder plugin initialization
     $('input[placeholder]').placeholder();
   });

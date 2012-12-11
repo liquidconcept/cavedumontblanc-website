@@ -13,27 +13,6 @@ require 'nanoc-sprockets-filter'
 require 'nanoc-gzip-filter'
 
 #
-# Compass
-#
-Compass.add_project_configuration 'config/compass.rb'
-
-#
-# Sprockets
-#
-Sprockets::Helpers.configure do |config|
-  config.environment = Nanoc::Filters::Sprockets.environment
-  config.prefix      = '/assets'
-  config.digest      = true
-end
-
-# Fix bug with Sprockets namespace
-module Sprockets
-  module Sass
-    Engine = ::Sass::Engine
-  end
-end if defined? ::Sass::Engine
-
-#
 # Nanoc
 #
 module Nanoc
@@ -46,3 +25,23 @@ module Nanoc
   end
 end
 
+#
+# Compass
+#
+Compass.add_project_configuration 'config/compass.rb'
+
+#
+# Sprockets
+#
+Nanoc::Helpers::Sprockets.configure do |config|
+  config.environment = Nanoc::Filters::Sprockets.environment
+  config.prefix      = '/assets'
+  config.digest      = Nanoc.production?
+end
+
+# Fix bug with Sprockets namespace
+module Sprockets
+  module Sass
+    Engine = ::Sass::Engine
+  end
+end if defined? ::Sass::Engine
