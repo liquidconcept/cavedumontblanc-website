@@ -17,9 +17,15 @@ gem 'therubyracer'
 gem 'nanoc-sprockets-filter'
 gem 'nanoc-gzip-filter'
 
+group :production, :staging do
+end
+
 group :development do
   gem 'capistrano'
   gem 'railsless-deploy'
+end
+
+group :development, :test do
 end
 
 group :guard do
