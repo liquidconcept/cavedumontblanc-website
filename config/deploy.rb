@@ -4,7 +4,7 @@ set :domain,      'cavedumontblanc.ch'
 set :server_name, 'ruby-rack-2.liquid-concept.ch'
 
 set :scm,         :git
-set :repository,  'git@github.com:liquidconcept/cavedumontblanc-website.git'
+set :repository,  '.'
 set :branch,      'production'
 
 ssh_options[:forward_agent] = true
