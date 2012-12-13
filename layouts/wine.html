@@ -1,0 +1,66 @@
+<section class="info">
+  <img src="<%= wine_image_path item %>">
+  <h3><%= item[:name] %></h3>
+  <article class="description">
+    <%= yield %>
+  </article>
+  <article class="technical_sheet">
+    <table>
+      <tr>
+        <th>Fiche Technique</th>
+        <th></th>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="label">Provenance : </span><%= item[:from] %></td>
+        <td><span class="label">T° de service : </span><%= item[:degree] %></td>
+      </tr>
+      <tr>
+        <td><span class="label">Domaine : </span><%= item[:domain] %></td>
+        <td><span class="label">Accord: </span><%= item[:agreement] %></td>
+      </tr>
+      <tr>
+        <td><span class="label">Cépage : </span><%= item[:grape] %></td>
+        <td><span class="label">Potentiel de garde : </span><%= item[:aging_potential] %></td>
+      </tr>
+      <tr>
+        <td><span class="label">Année : </span><%= item[:year] %></td>
+        <td>
+          <% if item[:baric] == nil %>
+            &nbsp;
+          <% else %>
+            <span class='label'>En barique : </span><%= item[:baric] %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td><span class="label">Volume : </span><%= item[:size] %></td>
+        <td>
+          <% if item[:refinement] == nil %>
+            &nbsp;
+          <% else %>
+            <span class='label'>Affinage en bouteille : </span><%= item[:refinement] %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td><span class="label">Prix de la bouteille : </span><%= item[:price_bottle] %></td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td><span class="label">Prix de la caisse :</span>
+          <% if item[:price_box] == nil %>
+            Non disponible
+          <% else %>
+            <%= item[:price_box] %>
+          <% end %>
+        </td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+  </article>
+</section>
+

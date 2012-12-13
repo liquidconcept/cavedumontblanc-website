@@ -24,82 +24,15 @@
       <footer class="main">
         <p>© 2012 La cave du Mont-Blanc. All Rights Reserved. Site développé par <a href="http://www.liquid-concept.ch">Liquid Concept</a></p>
       </footer>
-      <div id="lightbox">
-        <div id="lightwrap">
-          <div id="close_lightbox">x</div>
-          <% wines.each_with_index do |item, index| %> 
-            <article class="item item_<%= index %>">
-              <img src="<%= image_path item[:image] %>">
-              <div class="info">
-                <h3><%= item[:name] %></h3><br />
-                <p class="description">
-                  <%= item[:description] && item[:description].gsub(/\n/, '<br />') %>
-                </p><br />
-                <div class="technical_sheet">
-                  <table>
-                    <tr>
-                      <th><h5>Fiche Technique</h5></th>
-                      <th></th>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><p><span class="red">Provenance : </span><%= item[:from] %></p></td>
-                      <td><p><span class="red">T° de service : </span><%= item[:degree] %></p></td>
-                    </tr>
-                    <tr>
-                      <td><p><span class="red">Domaine : </span><%= item[:domain] %></p></td>
-                      <td><p><span class="red">Accord: </span><%= item[:agreement] %></p></td>
-                    </tr>
-                    <tr>
-                      <td><p><span class="red">Cépage : </span><%= item[:grape] %></p></td>
-                      <td><p><span class="red">Potentiel de garde : </span><%= item[:aging_potential] %></p></td>
-                    </tr>
-                    <tr>
-                      <td><p><span class="red">Année : </span><%= item[:year] %></p></td>
-                      <td>
-                        <% if item[:baric] == nil %>
-                          <p></p>
-                        <% else %>
-                          <p><span class='red'>En barique : </span><%= item[:baric] %></p>
-                        <% end %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><p><span class="red">Volume : </span><%= item[:size] %></p></td>
-                      <td>
-                        <% if item[:refinement] == nil %>
-                          <p></p>
-                        <% else %>
-                          <p><span class='red'>En barique : </span><%= item[:refinement] %></p>
-                        <% end %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><p><span class="red">Prix de la bouteille : </span><%= item[:price_bottle] %></p></td>
-                      <td><p></p></td>
-                    </tr>
-                    <tr>
-                      <td><p><span class="red">Prix de la caisse : </span>
-                        <% if item[:price_box] == nil %>
-                          Non disponible
-                        <% else %>
-                          <%= item[:price_box] %>
-                        <% end %>
-                       </p></td>
-                      <td><p></p></td>
-                    </tr>
-                  </table>
-                </div>   
-              </div>
-            </article>
-          <% end %>
-        </div>
-      </div>
     </section>
-    <div id="shade_lightbox"></div>
+    <section id="details">
+      <div class="close">x</div>
+      <% wines.each_with_index do |item, index| %>
+        <article class="item item_<%= index %>">
+          <%= item.compiled_content %>
+        </article>
+      <% end %>
+    </section>
     <% if Nanoc.production? %>
       <script type="text/javascript">
         var _gaq = _gaq || [];

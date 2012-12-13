@@ -30,7 +30,7 @@
           <p class="price"><%= item[:price_bottle] %></p>
           <div class="out_of_stock"></div>
         </div>
-        <img src="<%= image_path item[:image] %>" class="bottle">
+        <img src="<%= wine_image_path item, :rep => :lying_down %>" class="bottle">
       </article>
     <% end %>
   </section>
@@ -68,7 +68,7 @@
       <section>
         <% wines.each_with_index do |item, index| %> 
           <article class="item item_<%= index %>">
-            <img src="<%= image_path item[:min_image] %>" />
+            <img src="<%= wine_image_path item, :rep => :standing_thumbnail %>" />
             <div class="info">
               <span class="name"><%= item[:name] %></span><br />
               <span class="description"><%= item[:from] %>, <%= item[:domain] %>, <%= item[:year] %> - <%= item[:size] %></span>
