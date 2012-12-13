@@ -1,6 +1,8 @@
 @import "compass/reset";
 @import "compass/css3";
 @import "compass/typography/text/replacement";
+@import "compass/utilities/general/clearfix";
+@import "compass/typography/lists/horizontal-list";
 
 @import url(http://fonts.googleapis.com/css?family=Questrial);
 
@@ -132,13 +134,6 @@ body {
     text-align: justify;
   }
 
-  .clearboth {
-    width: 0px;
-    height: 0px;
-    clear: both;
-    border-width: 0px; 
-  }
-
   input, input:focus {
     border: 1px solid $grey;
   }
@@ -181,6 +176,7 @@ body {
 section.main {
   width: 960px;
   margin: 0 auto;
+  position: relative;
 
   header.main {
     h1 {
@@ -188,16 +184,23 @@ section.main {
       float: left;
       margin: 10px 0;
     }
+
+    @include pie-clearfix;
   }
   nav {
     margin: 10px 0px 10px 0px;
+    float: right;
 
     ul {
-      float: right;
+      @include horizontal-list;
       margin-top: 10px;
 
       li {
-        display: inline;
+        border-left: 1px solid $dark_grey;
+
+        &:first-child {
+          border-left: none;
+        }
       }
     }
   }
@@ -230,19 +233,30 @@ header.content {
   border-top: 1px solid $grey;
   overflow: hidden;
 
-  .slider_balls {
-    .balls {
-      width: 10px;
-      height: 10px;
-      float: right;
-      margin-right: 10px;
-      background-color: $grey;
-      @include border-radius(5px, 5px);
+  h2 {
+    display: inline-block;
+  }
 
-      &.active, &:hover {
+  .slider_balls {
+    float: right;
+    margin-top: 8px;
+
+    ul {
+      @include horizontal-list(5px);
+
+      a {
+        display: block;
+        width: 10px;
+        height: 10px;
+        background-color: $grey;
+        @include border-radius(5px, 5px);
+
+      }
+
+      .ball.active a, a:hover {
         background-color: $dark_grey;
       }
-    } 
+    }
   }
 
   .items {

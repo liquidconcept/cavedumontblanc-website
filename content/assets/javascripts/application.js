@@ -35,10 +35,10 @@
 
       // bind balls click
       var that = this;
-      $('#promotions .balls').on('click', function(event) {
+      $('#promotions .ball a').on('click', function(event) {
         event.preventDefault();
 
-        var index = Math.abs($(this).siblings().andSelf().index(this) - $(this).siblings().andSelf().length + 1);
+        var index = $(this).parent().siblings().andSelf().index($(this).parent());
 
         var next_item = $('#promotions article.item').slice(index, index + 1);
 
@@ -106,11 +106,11 @@
       nextItem.css('left', this.width + 'px');
 
       // find index of balls for current & next item
-      var visibleBallIndex = Math.abs($(this.items).index(visibleItem) - this.items.length + 1);
-      var nextBallIndex = Math.abs($(this.items).index(nextItem) - this.items.length + 1);
+      var visibleBallIndex = $(this.items).index(visibleItem);
+      var nextBallIndex = $(this.items).index(nextItem);
 
       // animate balls
-      _.each([$('#promotions .balls').slice(visibleBallIndex, visibleBallIndex + 1), $('#promotions .balls').slice(nextBallIndex, nextBallIndex + 1)], function(ball) {
+      _.each([$('#promotions .slider_balls .ball').slice(visibleBallIndex, visibleBallIndex + 1), $('#promotions .slider_balls .ball').slice(nextBallIndex, nextBallIndex + 1)], function(ball) {
         ball.toggleClass('active', this.slideDuration);
       }, this);
 

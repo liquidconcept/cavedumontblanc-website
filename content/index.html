@@ -4,11 +4,13 @@
 </header>
 <a id="anchor_promo"></a>
 <article id="promotions">
-  <h1>Promotions</h1>
+  <h2>Promotions</h2>
   <section class="slider_balls">
-    <% wines.each_with_index do |item, index| %>
-      <a href="#" class="balls item_<%= index %><%= index == (wines.size - 1) ? ' active' : nil %>"></a>
-    <% end %>
+    <ul>
+      <% wines.each_with_index do |item, index| %>
+        <li class="ball item_<%= index %><%= index == 0 ? ' active' : nil %>"><a href="#"></a></li>
+      <% end %>
+   </ul>
   </section>
   <section class="items">
     <% wines.each_with_index do |item, index| %>
@@ -35,7 +37,7 @@
 </article>
 <a id="anchor_command"></a>
 <article id="command">
-  <h1>Commander</h1>
+  <h2>Commander</h2>
   <form method="post" action="/command">
     <div id="address">
       <h3>Vos informations</h3>
@@ -97,7 +99,7 @@
 </article>
 <a id="anchor_contact"></a>
 <article id="contact">
-  <h1>Nous trouver</h1>
+  <h2>Nous trouver</h2>
   <div id="info_contact">
     <p>Nous disposons d'une grande palette de vins italiens
     et français et sommes en mesure de satisfaire vos
