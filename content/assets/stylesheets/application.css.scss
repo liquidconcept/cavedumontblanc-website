@@ -392,7 +392,8 @@ header.content {
 
     article {
       width: 100%;
-      clear: both;
+      margin-bottom: 5px;
+      @include pie-clearfix;
 
       > img {
         display: block;
@@ -404,19 +405,18 @@ header.content {
         display: block;
         float: left;
         height: 50px;
-        margin-bottom: 10px;
         cursor: pointer;
-
-        .name {
-          font-size: 1.2em; 
-          color: $red;
-        }
+        width: 270px;
 
         span {
-          float: left;
-          margin-left: 20px;
+          display: block;
+          padding-left: 20px;
           font-size:  0.7em;
-          word-wrap: break-word;
+
+          &.name {
+            font-size: 1.2em;
+            color: $red;
+          }
         }
       }
 
@@ -427,21 +427,23 @@ header.content {
         .price_content {
           margin-left: 10px;
           position: relative;
-          float: left;
+          width: 65px;
+          float: right;
 
-          span {
+          span, input {
+            position: relative;
             display: block;
             width: 100%;
             font-size: 0.7em;
             line-height: 15px;
-          } 
 
-          .price {
-            color: $red;
-          }
+            &.price {
+              color: $red;
+            }
 
-          .field {
-            width: 60px;
+            &.field {
+              width: 60px;
+            }
           }
 
           @include disable-box('min_disable.png');

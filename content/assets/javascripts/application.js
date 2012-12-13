@@ -5,6 +5,7 @@
 // =require jquery-placeholder
 
 (function($, undefined) {
+  var scrollPosition, scrollbarWidth;
 
   /* Slider class */
 
@@ -157,8 +158,63 @@
     });
   }
 
+  // Wine detail
+  var showWineDetail = function() {
+    var item_class = $(this).parents('article.item').first().attr('class').match(/item_\d+/)[0];
+    scrollPosition = $(window).scrollTop();
+
+    $('#details article.' + item_class).show();
+    $('section.main > *').wrapAll('<div />').parent()
+    .css({
+      position: 'fixed',
+      top: '0',
+      'margin-top': -scrollPosition + 'px',
+      width: $('section.main').width()
+    });
+    $('section.main').css('padding-right', scrollbarWidth + 'px');
+
+    $('body').css({
+      height: Math.max($(window).outerHeight() - ($('#details').outerHeight(true) - $('#details').outerHeight()), $('#details').outerHeight()),
+      'padding-bottom': $(window).outerHeight() <= $('#details').outerHeight() ? '50px' : '0px'
+    });
+
+    overlayToggle($('body'), { loader: false });
+    $('body > .overlay').css({
+      height: $('section.main > div').outerHeight(),
+    });
+
+    $('#details').fadeIn();
+  }
+
+  var hideWineDetail = function(){
+    overlayToggle($('body'));
+
+    $('#details').fadeOut(function() {
+      $('section.main').css('padding-right', 0);
+      $('header.main, section.content, footer.main').unwrap();
+      $(window).scrollTop(scrollPosition);
+      $('#details article.item').hide();
+    });
+  }
+
   // init
   $(function() {
+    // scrollbarWidth
+    scrollbarWidth = (function() {
+      var $inner = jQuery('<div style="width: 100%; height:200px;">test</div>'),
+      $outer = jQuery('<div style="width:200px;height:150px; position: absolute; top: 0; left: 0; visibility: hidden; overflow:hidden;"></div>').append($inner),
+      inner = $inner[0],
+      outer = $outer[0];
+
+      jQuery('body').append(outer);
+      var width1 = inner.offsetWidth;
+      $outer.css('overflow', 'scroll');
+      var width2 = outer.clientWidth;
+      $outer.remove();
+
+      return (width1 - width2);
+    })();
+
     // slider
     var slider = window.slider = new Slider();
     slider.start();
@@ -211,41 +267,8 @@
     });
 
     // Lightbox wines initialization
-    var scrollPosition;
-    $('article.item > img, article.item > .info, article.item .price_container').on('click', function() {
-      var item_class = $(this).parents('article.item').first().attr('class').match(/item_\d+/)[0];
-      scrollPosition = $('body').scrollTop();
-
-      $('#details article.' + item_class).show();
-      $('section.main > *').wrapAll('<div />').parent()
-      .css({
-        position: 'fixed',
-        top: -scrollPosition + 'px',
-        width: $('section.main').width()
-      });
-      $('body').scrollTop(0);
-
-      $('body').css({
-        height: Math.max($(window).outerHeight() - ($('#details').outerHeight(true) - $('#details').outerHeight()), $('#details').outerHeight()),
-        'padding-bottom': $(window).outerHeight() <= $('#details').outerHeight() ? '50px' : '0px'
-      });
-
-      overlayToggle($('body'), { loader: false });
-      $('body > .overlay').css({
-        height: $('section.main > div').outerHeight(),
-      });
-
-      $('#details').fadeIn();
-    });
-
-    $('#details .close').on('click', function(){
-      overlayToggle($('body'));
-      $('#details').fadeOut(function() {
-        $('header.main, section.content, footer.main').unwrap();
-        $('body').scrollTop(scrollPosition);
-        $('#details article.item').hide();
-      });
-    });
+    $('article.item > img, article.item > .info, article.item .price_container').on('click', showWineDetail);
+    $('#details .close').on('click', hideWineDetail);
 
     // Placeholder plugin initialization
     $('input[placeholder]').placeholder();

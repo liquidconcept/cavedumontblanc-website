@@ -70,20 +70,20 @@
           <article class="item item_<%= index %>">
             <img src="<%= wine_image_path item, :rep => :standing_thumbnail %>" />
             <div class="info">
-              <span class="name"><%= item[:name] %></span><br />
+              <span class="name"><%= item[:name] %></span>
               <span class="description"><%= item[:from] %>, <%= item[:domain] %>, <%= item[:year] %> - <%= item[:size] %></span>
             </div>
             <div class="prices_container">
-              <div class="price_content bottles <%= item[:stock_bottle] ? nil : ' disable' %>">
-                <span class="label">Bouteille</span>
-                <span class="price"><%= item[:price_bottle] || '&nbsp;' %></span>
-                <input type="number" name="bottle[<%= item[:name] %>]" placeholder="Qte" class="field"<%= item[:stock_bottle] ? nil : ' disabled' %>>
-                <div class="out_of_stock"></div>
-              </div>
               <div class="price_content boxes<%= item[:stock_box] ? nil : ' disable' %>">
                 <span class="label">Caisse</span>
                 <span class="price"><%= item[:price_box] || '&nbsp;' %></span>
                 <input type="number" name="box[<%= item[:name] %>]" placeholder="Qte" class="field"<%= item[:stock_box] ? nil : ' disabled' %>>
+                <div class="out_of_stock"></div>
+              </div>
+              <div class="price_content bottles <%= item[:stock_bottle] ? nil : ' disable' %>">
+                <span class="label">Bouteille</span>
+                <span class="price"><%= item[:price_bottle] || '&nbsp;' %></span>
+                <input type="number" name="bottle[<%= item[:name] %>]" placeholder="Qte" class="field"<%= item[:stock_bottle] ? nil : ' disabled' %>>
                 <div class="out_of_stock"></div>
               </div>
             </div>
