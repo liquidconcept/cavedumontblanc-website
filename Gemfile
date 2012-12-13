@@ -1,7 +1,7 @@
 # encoding: utf-8
 source "http://rubygems.org"
 
-gem 'rack', '1.4.1'
+gem 'rack'
 gem 'nanoc'
 gem 'sinatra'
 gem 'pony'
