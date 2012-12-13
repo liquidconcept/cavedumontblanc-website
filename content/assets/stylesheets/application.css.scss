@@ -85,40 +85,32 @@ $green: #3A7C1A;
 /*----------------------------------------*/ 
 
 body {
+  color: $dark_grey;
+  font-family: 'Questrial', sans-serif;
 
-  h1 {
+  h2 {
     font-size: 2.5em;
-    color: $dark_grey;
-    font-family: 'Questrial', sans-serif;
   }
 
   h3 {
     font-size: 1.8em;
-    color: $dark_grey;
-    font-family: 'Questrial', sans-serif;
   }
 
   h4 {
     font-size: 1.2em;
-    color: $dark_grey;
-    font-family: 'Questrial', sans-serif;
     margin-bottom: 10px;
   }
 
   h5 {
     font-size: 1.2em;
     color: $white;
-    font-family: 'Questrial', sans-serif;
   }
 
   p, legend {
-    font-family: 'Questrial', sans-serif;
-    color: $dark_grey;
     text-align: justify;
   }
 
   a {
-    font-family: 'Questrial', sans-serif;
     color: $dark_grey;
     text-decoration: none;
   }
@@ -128,9 +120,7 @@ body {
   }
 
   span, label {
-    font-family: 'Questrial', sans-serif;
     font-size: 0.8em; 
-    color: $dark_grey;
     text-align: justify;
   }
 
