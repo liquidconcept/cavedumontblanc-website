@@ -5,7 +5,76 @@
 // =require jquery-placeholder
 
 (function($, undefined) {
-  var scrollPosition, scrollbarWidth;
+  var scrollPosition = 0, scrollbarWidth = 0;
+
+  // Params from hash
+  var History = function() {
+    this._initialize();
+  }
+
+  _.extend(History.prototype, {
+    _initialize: function() {
+      this.params = {};
+
+      // parse location
+      this.parseLocation();
+
+      // bind
+      _.bindAll(this);
+    },
+
+    get: function(key) {
+      return this.params[key];
+    },
+
+    set: function(key, value) {
+      return this.params[key] = value;
+    },
+
+    has: function(key) {
+      return _.has(this.params, key);
+    },
+
+    parseLocation: function() {
+      var hash;
+
+      if (hash = window.location.hash.match(/#!(.+)/)) {
+        hash = hash[1].split('|');
+        while (hash.length > 0) {
+          var key = hash.shift();
+          var value = hash.shift();
+          this.params[key] = value;
+        }
+      }
+    },
+
+    toParams: function() {
+      if (!_.isEmpty(this.params)) {
+        return '#!' + _.map(_.pairs(this.params), function(pair) {
+          return pair.join('|');
+        }).join('|');
+      } else {
+        return '';
+      }
+    },
+
+    setLocation: function(params) {
+      if (_.isObject(params)) {
+        this.params = {};
+
+        _.each(_.pairs(params), function(pair) {
+          this.params[pair[0]] = pair[1];
+        }, this);
+      }
+
+      window.location.hash = this.toParams();
+    },
+
+    resetLocation: function() {
+      this.setLocation({});
+    }
+  });
+  History = new History();
 
   /* Slider class */
 
@@ -160,7 +229,11 @@
 
   // Wine detail
   var showWineDetail = function() {
-    var item_class = $(this).parents('article.item').first().attr('class').match(/item_\d+/)[0];
+    if ($(this).hasClass('item')) {
+      var item_class = $(this).first().attr('class').match(/item_\d+/)[0];
+    } else {
+      var item_class = $(this).parents('article.item').first().attr('class').match(/item_\d+/)[0];
+    }
     scrollPosition = $(window).scrollTop();
 
     $('#details article.' + item_class).show();
@@ -184,6 +257,8 @@
     });
 
     $('#details').fadeIn();
+
+    History.setLocation({wine: _.find(wines, function(wine, key) { return wine.index === parseInt(item_class.match(/\d+/)[0]) }).key });
   }
 
   var hideWineDetail = function(){
@@ -195,6 +270,8 @@
       $(window).scrollTop(scrollPosition);
       $('#details article.item').hide();
     });
+
+    History.resetLocation();
   }
 
   // init
@@ -219,6 +296,11 @@
     var slider = window.slider = new Slider();
     slider.start();
 
+    // show wine if requested
+    if (History.has('wine') && wines[History.get('wine')]) {
+      showWineDetail.apply($('article.item_' + wines[History.get('wine')].index));
+    }
+
     // validation
     $('#delivery_address').change(function() {
       $('#delivery_address_fields').fadeToggle("fast", "swing");
@@ -227,7 +309,6 @@
       });
       initValidation();
     });
-
     initValidation();
 
     // send form

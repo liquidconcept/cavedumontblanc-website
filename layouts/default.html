@@ -33,6 +33,17 @@
         </article>
       <% end %>
     </section>
+    <script type="text/javascript">
+      var wines = {};
+      <% wines.each_with_index do |item, index| %>
+        wines['<%= item[:key]%>'] = {
+          key: '<%= item[:key] %>',
+          index: <%= index %>,
+          name: '<%= item[:name] %>',
+          order: <%= item[:order] %>
+        }
+      <% end %>
+    </script>
     <% if Nanoc.production? %>
       <script type="text/javascript">
         var _gaq = _gaq || [];
