@@ -129,11 +129,19 @@
   });
 
   // Overlay
-  var overlayToggle = window.overlayToggle = function(el) {
+  var overlayToggle = window.overlayToggle = function(el, options) {
+    options = _.defaults(options || {}, {
+      loader: true
+    });
+
     el = $(el);
     if (el.has('.overlay').length === 0) {
       el.css('position', 'relative');
-      $('<div class="overlay"><div class="background" /><div class="loader" /></div>').appendTo(el).fadeIn();
+      var overlay = $('<div class="overlay"><div class="background" /></div>');
+      if (options.loader) {
+        overlay.append('<div class="loader" />');
+      }
+      overlay.appendTo(el).fadeIn();
     } else {
       el.children('.overlay').fadeOut(function() {
         $(this).remove();
