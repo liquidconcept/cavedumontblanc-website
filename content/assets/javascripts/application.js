@@ -258,7 +258,9 @@
 
     $('#details').fadeIn();
 
-    History.setLocation({wine: _.find(wines, function(wine, key) { return wine.index === parseInt(item_class.match(/\d+/)[0]) }).key });
+    var wine = _.find(wines, function(wine, key) { return wine.index === parseInt(item_class.match(/\d+/)[0]) });
+    History.setLocation({wine: wine.key });
+    _gaq.push(['_trackPageview', '/wines/' + wine.key]);
   }
 
   var hideWineDetail = function(){
@@ -272,6 +274,7 @@
     });
 
     History.resetLocation();
+    _gaq.push(['_trackPageview', '/']);
   }
 
   // init
@@ -299,6 +302,9 @@
     // show wine if requested
     if (History.has('wine') && wines[History.get('wine')]) {
       showWineDetail.apply($('article.item_' + wines[History.get('wine')].index));
+      _gaq.push(['_trackPageview', '/wines/' + History.get('wine')]);
+    } else {
+      _gaq.push(['_trackPageview']);
     }
 
     // validation
@@ -336,9 +342,7 @@
             overlayToggle($('#command'));
           });
 
-          if (_gaq !== undefined) {
-            _gaq.push(['_trackPageview', '/command']);
-          }
+          _gaq.push(['_trackPageview', '/command']);
         },
         error: function(xhr, status, error) {
           overlayToggle($('#command'));
