@@ -302,7 +302,6 @@
     // show wine if requested
     if (History.has('wine') && wines[History.get('wine')]) {
       showWineDetail.apply($('article.item_' + wines[History.get('wine')].index));
-      _gaq.push(['_trackPageview', '/wines/' + History.get('wine')]);
     } else {
       _gaq.push(['_trackPageview']);
     }
