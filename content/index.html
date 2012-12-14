@@ -40,23 +40,26 @@
     <div id="address">
       <h3>Vos informations</h3>
       <fieldset name="bild_address_fields">
-        <input type="text" name="bild_address[firstname]" placeholder="Prénom" class="name" id="border-box" required>
-        <input type="text" name="bild_address[lastname]" placeholder="Nom" class="name" id="border-box" required>
-        <input type="text" name="bild_address[address]" placeholder="Adresse" class="address" id="border-box" required>
-        <input type="text" name="bild_address[code]" placeholder="Code Postal" class="code" id="border-box" required>
-        <input type="text" name="bild_address[city]" placeholder="Ville" class="city" id="border-box" required>
-        <input type="phone" name="bild_address[phone]" placeholder="Téléphone" class="phone h5-phone" id="border-box" required>
-        <input type="email" name="bild_address[email]" placeholder="Email" class="email h5-email" id="border-box" required><br />
+        <input type="text" name="bild_address[firstname]" placeholder="Prénom" class="name" required />
+        <input type="text" name="bild_address[lastname]" placeholder="Nom" class="name" required />
+        <input type="text" name="bild_address[address]" placeholder="Adresse" class="address" required />
+        <input type="text" name="bild_address[code]" placeholder="Code Postal" class="code" required />
+        <input type="text" name="bild_address[city]" placeholder="Ville" class="city" required />
+        <input type="phone" name="bild_address[phone]" placeholder="Téléphone" class="phone h5-phone" required />
+        <input type="email" name="bild_address[email]" placeholder="Email" class="email h5-email" required />
       </fieldset>
+
       <label><input type="checkbox" name="delivery_address_same_bild" value="true" id="delivery_address" checked>Cette adresse est mon adresse de livraison</label>
+
       <fieldset name="delivery_address_fields" id="delivery_address_fields">
-        <input type="text" name="delivery_address[firstname]" placeholder="Prénom" class="name" id="border-box">
-        <input type="text" name="delivery_address[lastname]" placeholder="Nom" class="name" id="border-box">
-        <input type="text" name="delivery_address[address]" placeholder="Adresse" class="address" id="border-box">
-        <input type="text" name="delivery_address[code]" placeholder="Code Postal" class="code" id="border-box">
-        <input type="text" name="delivery_address[city]" placeholder="Ville" class="city" id="border-box">
+        <input type="text" name="delivery_address[firstname]" placeholder="Prénom" class="name" />
+        <input type="text" name="delivery_address[lastname]" placeholder="Nom" class="name" />
+        <input type="text" name="delivery_address[address]" placeholder="Adresse" class="address" />
+        <input type="text" name="delivery_address[code]" placeholder="Code Postal" class="code" />
+        <input type="text" name="delivery_address[city]" placeholder="Ville" class="city" />
       </fieldset>
-      <div id="condition">
+
+      <div class="conditions">
         <h4>Conditions Générales de Vente</h4>
         <p>Une fois la commande passée, vous recevez une facture que nous vous demandons de régler. La livraison ne s'effectuera qu'une fois le facture payée.</p>
       </div>

@@ -335,6 +335,7 @@
         url: $(this).attr('action'),
         data: $(this).serialize(),
         success: function(data, status, xhr) {
+          $('#command').css('height', $('#command').height());
           $('#command form').fadeOut(function() {
             $('#command ').addClass('success');
             $('<p>Commande envoyée avec succès</p>').hide().appendTo($('#command')).fadeIn();

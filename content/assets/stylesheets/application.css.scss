@@ -55,7 +55,7 @@ $green: #3A7C1A;
 
 .overlay {
   display: none;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -78,6 +78,10 @@ $green: #3A7C1A;
     }
   }
 
+}
+
+body > .overlay {
+  position: fixed;
 }
 
 /*----------------------------------------*/
@@ -311,7 +315,7 @@ header.content {
       position: absolute;
       bottom: -40px;
       left: 0px;
-    } 
+    }
   }
 }
 
@@ -320,9 +324,14 @@ header.content {
 /*----------------------------------------*/
 
 #command {
-  height: 479px;
-  padding: 20px 20px 0px 20px;
+  width: 920px;
+  padding: 20px;
   border-top: 1px solid $grey;
+
+  form {
+    @include pie-clearfix;
+    position: relative;
+  }
 
   h3 {
     width: 300px;
@@ -331,50 +340,59 @@ header.content {
   }
 
   #address {
-    width: 48%;
-    height: 410px;
-    float: left;
-    position:relative;
+    width: 460px;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
 
-    #border-box {
+    fieldset {
+      width: 360px;
+      margin-bottom: 15px;
+      @include pie-clearfix;
+
+      &[name=delivery_address_fields] {
+        margin-top: 10px;
+        display: none;
+      }
+    }
+
+    input {
       @include box-sizing(border-box);
-    }
-
-    .name {
-      width: 176px; 
+      line-height: 15px;
       margin-bottom: 4px;
+      margin: 0 4px 4px 0;
+      float: left;
+
+      &.name {
+        width: 176px;
+      }
+
+      &.address {
+        width: 356px;
+      }
+
+      &.code {
+        width: 90px;
+      }
+
+      &.city {
+        width: 262px;
+      }
+
+      &.phone {
+        width: 176px;
+      }
+
+      &.email {
+        width: 176px;
+      }
     }
 
-    .address {
-      width: 356px;
-      margin-bottom: 4px;
-    } 
-
-    .code {
-      width: 90px;
-      margin-bottom: 4px;
-    }
-
-    .city {
-      width: 262px;
-      margin-bottom: 4px;
-    }
-
-    .phone {
-      width: 176px;
-    }
-
-    .email {
-      width: 176px;
-    }
-
-    [name=delivery_address_fields] {
-      display: none;
-    }
-
-    #condition {
+    > .conditions {
       margin-top: 30px;
       position: absolute;
+      left: 0px;
       bottom: 0px;
 
       p {
@@ -385,7 +403,7 @@ header.content {
   }
 
   #order_form {
-    width: 48%;
+    width: 439px;
     float: right;
     padding-left: 20px;
     border-left: 1px solid $grey;
@@ -453,7 +471,6 @@ header.content {
 
     .buttons {
       position: relative;
-      clear: both;
       height: 50px;
 
       .agree {
