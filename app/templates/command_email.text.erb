@@ -19,6 +19,11 @@ Adresse : <%= params[:delivery_address][:address] %>
 Code postal : <%= params[:delivery_address][:code] %>
 Ville : <%= params[:delivery_address][:city] %>
 
+Code promo
+==========
+
+<%= params[:code_promo].empty? ? 'Pas de code promo' : params[:code_promo] %>
+
 Commande
 ========
 

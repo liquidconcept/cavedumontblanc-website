@@ -469,9 +469,26 @@ header.content {
       }
     }
 
+    .promo {
+      @include pie-clearfix;
+      margin-top: 15px;
+
+      input {
+        @include box-sizing(border-box);
+        float: right;
+        width: 140px;
+        font-size: 16px;
+        line-height: 22px;
+        height: 22px;
+        text-transform: uppercase;
+        text-align: center;
+      }
+    }
+
     .buttons {
       position: relative;
-      height: 50px;
+      @include pie-clearfix;
+      margin-top: 10px;
 
       .agree {
         position: absolute;
@@ -484,10 +501,9 @@ header.content {
       }
 
       .submit {
-        position: absolute;
-        bottom: 0px;
-        right: 0px;
-        width: 143px;
+        @include box-sizing(border-box);
+        float: right;
+        width: 140px;
         height: 30px;
         color: $white;
         background-color: $red;
