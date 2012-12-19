@@ -1,14 +1,15 @@
 <header class="content">
-  <h1>C'est déjà Noël</h1>
+  <h2>C'est déjà Noël</h2>
   <legend>Profitez des promotions uniques de la cave du Mont-Blanc</legend>
 </header>
-<a id="anchor_promo"></a>
 <article id="promotions">
-  <h1>Promotions</h1>
+  <h2>Promotions</h2>
   <section class="slider_balls">
-    <% wines.each_with_index do |item, index| %>
-      <a href="#" class="balls item_<%= index %><%= index == (wines.size - 1) ? ' active' : nil %>"></a>
-    <% end %>
+    <ul>
+      <% wines.each_with_index do |item, index| %>
+        <li class="ball item_<%= index %><%= index == 0 ? ' active' : nil %>"><a href="#"></a></li>
+      <% end %>
+   </ul>
   </section>
   <section class="items">
     <% wines.each_with_index do |item, index| %>
@@ -28,35 +29,37 @@
           <p class="price"><%= item[:price_bottle] %></p>
           <div class="out_of_stock"></div>
         </div>
-        <img src="<%= image_path item[:image] %>" class="bottle">
+        <img src="<%= wine_image_path item, :rep => :lying_down %>" class="bottle">
       </article>
     <% end %>
   </section>
 </article>
-<a id="anchor_command"></a>
 <article id="command">
-  <h1>Commander</h1>
+  <h2>Commander</h2>
   <form method="post" action="/command">
     <div id="address">
       <h3>Vos informations</h3>
       <fieldset name="bild_address_fields">
-        <input type="text" name="bild_address[firstname]" placeholder="Prénom" class="name" id="border-box" required>
-        <input type="text" name="bild_address[lastname]" placeholder="Nom" class="name" id="border-box" required>
-        <input type="text" name="bild_address[address]" placeholder="Adresse" class="address" id="border-box" required>
-        <input type="text" name="bild_address[code]" placeholder="Code Postal" class="code" id="border-box" required>
-        <input type="text" name="bild_address[city]" placeholder="Ville" class="city" id="border-box" required>
-        <input type="phone" name="bild_address[phone]" placeholder="Téléphone" class="phone h5-phone" id="border-box" required>
-        <input type="email" name="bild_address[email]" placeholder="Email" class="email h5-email" id="border-box" required><br />
+        <input type="text" name="bild_address[firstname]" placeholder="Prénom" class="name" required />
+        <input type="text" name="bild_address[lastname]" placeholder="Nom" class="name" required />
+        <input type="text" name="bild_address[address]" placeholder="Adresse" class="address" required />
+        <input type="text" name="bild_address[code]" placeholder="Code Postal" class="code" required />
+        <input type="text" name="bild_address[city]" placeholder="Ville" class="city" required />
+        <input type="phone" name="bild_address[phone]" placeholder="Téléphone" class="phone h5-phone" required />
+        <input type="email" name="bild_address[email]" placeholder="Email" class="email h5-email" required />
       </fieldset>
+
       <label><input type="checkbox" name="delivery_address_same_bild" value="true" id="delivery_address" checked>Cette adresse est mon adresse de livraison</label>
+
       <fieldset name="delivery_address_fields" id="delivery_address_fields">
-        <input type="text" name="delivery_address[firstname]" placeholder="Prénom" class="name" id="border-box">
-        <input type="text" name="delivery_address[lastname]" placeholder="Nom" class="name" id="border-box">
-        <input type="text" name="delivery_address[address]" placeholder="Adresse" class="address" id="border-box">
-        <input type="text" name="delivery_address[code]" placeholder="Code Postal" class="code" id="border-box">
-        <input type="text" name="delivery_address[city]" placeholder="Ville" class="city" id="border-box">
+        <input type="text" name="delivery_address[firstname]" placeholder="Prénom" class="name" />
+        <input type="text" name="delivery_address[lastname]" placeholder="Nom" class="name" />
+        <input type="text" name="delivery_address[address]" placeholder="Adresse" class="address" />
+        <input type="text" name="delivery_address[code]" placeholder="Code Postal" class="code" />
+        <input type="text" name="delivery_address[city]" placeholder="Ville" class="city" />
       </fieldset>
-      <div id="condition">
+
+      <div class="conditions">
         <h4>Conditions Générales de Vente</h4>
         <p>Une fois la commande passée, vous recevez une facture que nous vous demandons de régler. La livraison ne s'effectuera qu'une fois la facture payée.</p>
       </div>
@@ -66,51 +69,53 @@
       <section>
         <% wines.each_with_index do |item, index| %> 
           <article class="item item_<%= index %>">
-            <img src="<%= image_path item[:min_image] %>" />
+            <img src="<%= wine_image_path item, :rep => :standing_thumbnail %>" />
             <div class="info">
-              <span class="name"><%= item[:name] %></span><br />
+              <span class="name"><%= item[:name] %></span>
               <span class="description"><%= item[:from] %>, <%= item[:domain] %>, <%= item[:year] %> - <%= item[:size] %></span>
             </div>
             <div class="prices_container">
-              <div class="price_content bottles <%= item[:stock_bottle] ? nil : ' disable' %>">
-                <span class="label">Bouteille</span>
-                <span class="price"><%= item[:price_bottle] || '&nbsp;' %></span>
-                <input type="number" name="bottle[<%= item[:name] %>]" placeholder="Qte" class="field"<%= item[:stock_bottle] ? nil : ' disabled' %>>
-                <div class="out_of_stock"></div>
-              </div>
               <div class="price_content boxes<%= item[:stock_box] ? nil : ' disable' %>">
                 <span class="label">Caisse</span>
                 <span class="price"><%= item[:price_box] || '&nbsp;' %></span>
                 <input type="number" name="box[<%= item[:name] %>]" placeholder="Qte" class="field"<%= item[:stock_box] ? nil : ' disabled' %>>
                 <div class="out_of_stock"></div>
               </div>
+              <div class="price_content bottles <%= item[:stock_bottle] ? nil : ' disable' %>">
+                <span class="label">Bouteille</span>
+                <span class="price"><%= item[:price_bottle] || '&nbsp;' %></span>
+                <input type="number" name="bottle[<%= item[:name] %>]" placeholder="Qte" class="field"<%= item[:stock_bottle] ? nil : ' disabled' %>>
+                <div class="out_of_stock"></div>
+              </div>
             </div>
           </article>
         <% end %>
+
+        <div class="promo">
+          <input type="text" name="code_promo" placeholder="Code promo" class="field" />
+        </div>
+
         <div class="buttons">
-          <label class="agree"><input type="checkbox" name="accept_conditions" value="true" required><span>J'ai lu et adhéré aux conditions générales</span></label>
+          <label class="agree"><input type="checkbox" name="accept_conditions" value="true"><span>J'ai lu et adhéré aux conditions générales</span></label>
           <input type="submit" value="Envoyer" class="submit">
         </div>
       </section>
     </div>
   </form>
 </article>
-<a id="anchor_contact"></a>
 <article id="contact">
-  <h1>Nous trouver</h1>
-  <div id="info_contact">
-    <p>Nous disposons d'une grande palette de vins italiens
-    et français et sommes en mesure de satisfaire vos
-    exigences. N'hésitez donc pas à nous contacter.</p><br />
+  <h2>Nous trouver</h2>
+  <div class="infos">
+    <p>Nous disposons d'une grande palette de vins italiens et français et nous sommes en mesure de satisfaire vos exigences. N'hésitez donc pas à nous contacter.</p><br />
     <address>
       <p>La cave du Mont-blanc</p>
       <p>Avenue de Cour 6A</p>
       <p>1007 Lausanne</p><br />
-      <p id="phone_number">+41 (0)21 616 92 92</p>
-      <p id="mail_address">cavedumontblanc@citycable.ch</p>
+      <p id="phone">+41 (0)21 616 92 92</p>
+      <p class="email"><a href="mailto:cavedumontblanc@citycable.ch">cavedumontblanc@citycable.ch</a></p>
     </address>
   </div>
-  <div id="google_map">
+  <div class="maps">
     <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.ch/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;iwloc=&amp;q=Cave+du+Mont-Blanc,+Avenue+de+Cour,+Lausanne&amp;aq=0&amp;oq=Cave+d&amp;sll=46.512244,6.626392&amp;sspn=0.010632,0.021007&amp;g=Avenue+de+Cour+6A,+1007+Lausanne,+Vaud&amp;ie=UTF8&amp;hq=Cave+du+Mont-Blanc,&amp;hnear=Avenue+de+Cour,+Lausanne,+Vaud&amp;ll=46.512246,6.626387&amp;spn=0.006389,0.017489&amp;t=m&amp;output=embed"></iframe><br /><small><a href="http://maps.google.ch/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Cave+du+Mont-Blanc,+Avenue+de+Cour,+Lausanne&amp;aq=0&amp;oq=Cave+d&amp;sll=46.512244,6.626392&amp;sspn=0.010632,0.021007&amp;g=Avenue+de+Cour+6A,+1007+Lausanne,+Vaud&amp;ie=UTF8&amp;hq=Cave+du+Mont-Blanc,&amp;hnear=Avenue+de+Cour,+Lausanne,+Vaud&amp;ll=46.512246,6.626387&amp;spn=0.006389,0.017489&amp;t=m" style="color:#0000FF;text-align:left">View Larger Map</a></small>
   </div>
 </article>

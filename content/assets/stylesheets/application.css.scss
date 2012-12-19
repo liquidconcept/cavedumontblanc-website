@@ -1,6 +1,9 @@
 @import "compass/reset";
 @import "compass/css3";
 @import "compass/typography/text/replacement";
+@import "compass/utilities/general/clearfix";
+@import "compass/typography/lists/horizontal-list";
+@import "compass/typography/links/unstyled-link";
 
 @import url(http://fonts.googleapis.com/css?family=Questrial);
 
@@ -57,7 +60,6 @@ $green: #3A7C1A;
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 10000;
 
   * {
     position: absolute;
@@ -78,47 +80,42 @@ $green: #3A7C1A;
 
 }
 
+body > .overlay {
+  position: fixed;
+}
+
 /*----------------------------------------*/
 /*                DEFAULT                 */
 /*----------------------------------------*/ 
 
 body {
+  color: $dark_grey;
+  font-family: 'Questrial', sans-serif;
 
-  h1 {
+  h2 {
     font-size: 2.5em;
-    color: $dark_grey;
-    font-family: 'Questrial', sans-serif;
   }
 
   h3 {
     font-size: 1.8em;
-    color: $dark_grey;
-    font-family: 'Questrial', sans-serif;
   }
 
   h4 {
     font-size: 1.2em;
-    color: $dark_grey;
-    font-family: 'Questrial', sans-serif;
     margin-bottom: 10px;
   }
 
   h5 {
     font-size: 1.2em;
     color: $white;
-    font-family: 'Questrial', sans-serif;
   }
 
   p, legend {
-    font-family: 'Questrial', sans-serif;
-    color: $dark_grey;
     text-align: justify;
   }
 
   a {
-    font-family: 'Questrial', sans-serif;
-    color: $dark_grey;
-    text-decoration: none;
+    @include unstyled-link;
   }
 
   a:hover {
@@ -126,17 +123,8 @@ body {
   }
 
   span, label {
-    font-family: 'Questrial', sans-serif;
     font-size: 0.8em; 
-    color: $dark_grey;
     text-align: justify;
-  }
-
-  .clearboth {
-    width: 0px;
-    height: 0px;
-    clear: both;
-    border-width: 0px; 
   }
 
   input, input:focus {
@@ -181,6 +169,7 @@ body {
 section.main {
   width: 960px;
   margin: 0 auto;
+  position: relative;
 
   header.main {
     h1 {
@@ -188,16 +177,23 @@ section.main {
       float: left;
       margin: 10px 0;
     }
+
+    @include pie-clearfix;
   }
   nav {
     margin: 10px 0px 10px 0px;
+    float: right;
 
     ul {
-      float: right;
+      @include horizontal-list;
       margin-top: 10px;
 
       li {
-        display: inline;
+        border-left: 1px solid $dark_grey;
+
+        &:first-child {
+          border-left: none;
+        }
       }
     }
   }
@@ -230,19 +226,30 @@ header.content {
   border-top: 1px solid $grey;
   overflow: hidden;
 
-  .slider_balls {
-    .balls {
-      width: 10px;
-      height: 10px;
-      float: right;
-      margin-right: 10px;
-      background-color: $grey;
-      @include border-radius(5px, 5px);
+  h2 {
+    display: inline-block;
+  }
 
-      &.active, &:hover {
+  .slider_balls {
+    float: right;
+    margin-top: 8px;
+
+    ul {
+      @include horizontal-list(5px);
+
+      a {
+        display: block;
+        width: 10px;
+        height: 10px;
+        background-color: $grey;
+        @include border-radius(5px, 5px);
+
+      }
+
+      .ball.active a, a:hover {
         background-color: $dark_grey;
       }
-    } 
+    }
   }
 
   .items {
@@ -308,7 +315,7 @@ header.content {
       position: absolute;
       bottom: -40px;
       left: 0px;
-    } 
+    }
   }
 }
 
@@ -317,9 +324,14 @@ header.content {
 /*----------------------------------------*/
 
 #command {
-  height: 479px;
-  padding: 20px 20px 0px 20px;
+  width: 920px;
+  padding: 20px;
   border-top: 1px solid $grey;
+
+  form {
+    @include pie-clearfix;
+    position: relative;
+  }
 
   h3 {
     width: 300px;
@@ -328,50 +340,59 @@ header.content {
   }
 
   #address {
-    width: 48%;
-    height: 410px;
-    float: left;
-    position:relative;
+    width: 460px;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
 
-    #border-box {
+    fieldset {
+      width: 360px;
+      margin-bottom: 15px;
+      @include pie-clearfix;
+
+      &[name=delivery_address_fields] {
+        margin-top: 10px;
+        display: none;
+      }
+    }
+
+    input {
       @include box-sizing(border-box);
-    }
-
-    .name {
-      width: 176px; 
+      line-height: 15px;
       margin-bottom: 4px;
+      margin: 0 4px 4px 0;
+      float: left;
+
+      &.name {
+        width: 176px;
+      }
+
+      &.address {
+        width: 356px;
+      }
+
+      &.code {
+        width: 90px;
+      }
+
+      &.city {
+        width: 262px;
+      }
+
+      &.phone {
+        width: 176px;
+      }
+
+      &.email {
+        width: 176px;
+      }
     }
 
-    .address {
-      width: 356px;
-      margin-bottom: 4px;
-    } 
-
-    .code {
-      width: 90px;
-      margin-bottom: 4px;
-    }
-
-    .city {
-      width: 262px;
-      margin-bottom: 4px;
-    }
-
-    .phone {
-      width: 176px;
-    }
-
-    .email {
-      width: 176px;
-    }
-
-    [name=delivery_address_fields] {
-      display: none;
-    }
-
-    #condition {
+    > .conditions {
       margin-top: 30px;
       position: absolute;
+      left: 0px;
       bottom: 0px;
 
       p {
@@ -382,14 +403,15 @@ header.content {
   }
 
   #order_form {
-    width: 48%;
+    width: 439px;
     float: right;
     padding-left: 20px;
     border-left: 1px solid $grey;
 
     article {
       width: 100%;
-      clear: both;
+      margin-bottom: 5px;
+      @include pie-clearfix;
 
       > img {
         display: block;
@@ -401,19 +423,18 @@ header.content {
         display: block;
         float: left;
         height: 50px;
-        margin-bottom: 10px;
         cursor: pointer;
-
-        .name {
-          font-size: 1.2em; 
-          color: $red;
-        }
+        width: 270px;
 
         span {
-          float: left;
-          margin-left: 20px;
+          display: block;
+          padding-left: 20px;
           font-size:  0.7em;
-          word-wrap: break-word;
+
+          &.name {
+            font-size: 1.2em;
+            color: $red;
+          }
         }
       }
 
@@ -424,21 +445,23 @@ header.content {
         .price_content {
           margin-left: 10px;
           position: relative;
-          float: left;
+          width: 65px;
+          float: right;
 
-          span {
+          span, input {
+            position: relative;
             display: block;
             width: 100%;
             font-size: 0.7em;
             line-height: 15px;
-          } 
 
-          .price {
-            color: $red;
-          }
+            &.price {
+              color: $red;
+            }
 
-          .field {
-            width: 60px;
+            &.field {
+              width: 60px;
+            }
           }
 
           @include disable-box('min_disable.png');
@@ -446,10 +469,26 @@ header.content {
       }
     }
 
+    .promo {
+      @include pie-clearfix;
+      margin-top: 15px;
+
+      input {
+        @include box-sizing(border-box);
+        float: right;
+        width: 140px;
+        font-size: 16px;
+        line-height: 22px;
+        height: 22px;
+        text-transform: uppercase;
+        text-align: center;
+      }
+    }
+
     .buttons {
       position: relative;
-      clear: both;
-      height: 50px;
+      @include pie-clearfix;
+      margin-top: 10px;
 
       .agree {
         position: absolute;
@@ -462,10 +501,9 @@ header.content {
       }
 
       .submit {
-        position: absolute;
-        bottom: 0px;
-        right: 0px;
-        width: 143px;
+        @include box-sizing(border-box);
+        float: right;
+        width: 140px;
         height: 30px;
         color: $white;
         background-color: $red;
@@ -487,19 +525,27 @@ header.content {
 /*----------------------------------------*/
 /*                CONTACT                 */
 /*----------------------------------------*/
-
 #contact {
   height: 379px;
   padding: 20px 20px 0px 20px;
   border-top: 1px solid $grey;
+  @include pie-clearfix;
 
-  #info_contact {
+  > .infos {
     width: 430px;
     margin-top: 20px;
     float: left;
+
+    p:first-child {
+      padding-bottom: 12px;
+    }
+
+    .phone {
+      padding-top: 12px;
+    }
   }
 
-  #google_map {
+  > .maps {
     height: 300px;
     margin-top: 20px;
     overflow: hidden;
@@ -524,106 +570,94 @@ footer {
 }
 
 /*----------------------------------------*/
-/*                LIGHTBOX                */
+/*                DETAILS                 */
 /*----------------------------------------*/
 
-#lightbox {
-  width: 100%;
-  height: 100%;
+#details {
   position: relative;
   display: none;
+  width: 960px;
+  margin: 50px auto 0 auto;
+  border: 1px $red solid;
+  background-color: $white;
+  z-index: 1000;
 
-  #lightwrap {
-    height: 600px;
-    width: 960px;
-    position: fixed;
-    top: 50px;
-    z-index: 100;
-    border: 1px $red solid;
-    background-color: $white;
-  
-    #close_lightbox {
-      font-family:'Questrial', sans-serif;
-      font-size: 2em;
-      color: $red;
-      position: absolute;
-      top: 5px;
-      right: 10px;
-    }
+  .close {
+    font-family:'Questrial', sans-serif;
+    font-size: 2em;
+    color: $red;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    z-index: 1010;
+  }
 
-    article.item {
-      width: 900px;
-      height: 590px;
-      margin: 0 auto;
-      padding-right: 5px;
-      position: absolute;
-      display: none;
-      overflow: scroll;
+  article.item {
+    $width: 900px;
+    $padding: (960px - $width) / 2;
+    width: $width;
+    padding: $padding;
+    display: none;
+    position: relative;
+    z-index: 1005;
+    @include pie-clearfix;
 
-      img {
-        width: 400px;
+    .info {
+      > * {
         float: left;
-        position: relative;
-        left: -100px;
-        top: 190px;
-        @include rotate(-90deg);
+        width: $width - 110px - $padding;
       }
 
-      .info {
-        width: 700px;
-        float: right;
-        position: relative;
-        top: -50px;
-        left: 0px;
+      img {
+        width: 110px;
+        padding-right: $padding;
+      }
 
-        h3 {
-          color: $red;
+      h3 {
+        color: $red;
+        padding-bottom: 10px;
+      }
+
+      .description {
+        padding-bottom: $padding;
+
+        p {
+          padding-bottom: 7px;
         }
+      }
 
-        .technical_sheet {
-          table {
-            width: 100%;
+      .technical_sheet {
+        float: right;
 
-            tr:first-child {
+        table {
+          width: 100%;
+
+          tr:first-child {
+            background-color: $red;
+            height: 40px;
+
+            th {
               background-color: $red;
-              height: 40px;
-
-              th {
-                background-color: $red;
-
-                h5 {
-                  padding: 10px;
-                }
-              }
+              padding: 10px;
+              font-size: 1.2em;
+              color: $white;
+              font-family: 'Questrial', sans-serif;
             }
+          }
 
-            td {
-              width: 50%;
-              padding: 2px 0px;
+          td {
+            width: 50%;
+            padding: 2px 0px;
 
-              .red {
-                color: $red;
-                font-size: 1em;
-              }
+            .label {
+              color: $red;
+              font-size: 1em;
             }
-          } 
+          }
         }
       }
     }
   }
 }
 
-#shade_lightbox {
-  width: 100%;
-  height: 1785px;
-  display: none;
-  z-index: 1;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-
-  background-color: $black;
-  @include opacity(0.4);
-}

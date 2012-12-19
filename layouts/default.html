@@ -2,117 +2,59 @@
 <html lang="fr">
   <head>
     <meta charset="utf-8">
-    <title>La cave du Mont-Blanc - vins italiens de grand qualités - Lausanne, Montreux, Riviera</title>
+    <title>La cave du Mont-Blanc - Vins Italiens de grandes qualités - Lausanne, Montreux, Riviera</title>
+    <meta name="description" content="Nous disposons d'une grande palette de vins italiens et français et sommes en mesure de satisfaire vos exigences. N'hésitez donc pas à nous contacter." />
     <link rel="stylesheet" href="<%= stylesheet_path 'application' %>" media="screen">
     <script src="<%= javascript_path 'application' %>"></script>
   </head>
   <body>
     <section class="main">
       <header class="main">
-        <h1 id="logo">La cave du Mont-Blanc - vins italiens de grand qualités - Lausanne, Montreux, Riviera</h1>
+        <h1>La cave du Mont-Blanc - vins italiens de grand qualités - Lausanne, Montreux, Riviera</h1>
         <nav>
           <ul>
-            <li><a href="#anchor_promo">Promotions</a> |</li>
-            <li><a href="#anchor_command">Commander</a> |</li>
-            <li><a href="#anchor_contact">Nous trouver</a></li>
+            <li><a href="#promotions">Promotions</a></li>
+            <li><a href="#command">Commander</a></li>
+            <li><a href="#contact">Nous trouver</a></li>
           </ul>
         </nav>
-        <hr class="clearboth" />
       </header>
       <section class="content">
         <%= yield %>
       </section>
-      <footer>
+      <footer class="main">
         <p>© 2012 La cave du Mont-Blanc. All Rights Reserved. Site développé par <a href="http://www.liquid-concept.ch">Liquid Concept</a></p>
       </footer>
-      <div id="lightbox">
-        <div id="lightwrap">
-          <div id="close_lightbox">x</div>
-          <% wines.each_with_index do |item, index| %> 
-            <article class="item item_<%= index %>">
-              <img src="<%= image_path item[:image] %>">
-              <div class="info">
-                <h3><%= item[:name] %></h3><br />
-                <p class="description">
-                  <%= item[:description] && item[:description].gsub(/\n/, '<br />') %>
-                </p><br />
-                <div class="technical_sheet">
-                  <table>
-                    <tr>
-                      <th><h5>Fiche Technique</h5></th>
-                      <th></th>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><p><span class="red">Provenance : </span><%= item[:from] %></p></td>
-                      <td><p><span class="red">T° de service : </span><%= item[:degree] %></p></td>
-                    </tr>
-                    <tr>
-                      <td><p><span class="red">Domaine : </span><%= item[:domain] %></p></td>
-                      <td><p><span class="red">Accord: </span><%= item[:agreement] %></p></td>
-                    </tr>
-                    <tr>
-                      <td><p><span class="red">Cépage : </span><%= item[:grape] %></p></td>
-                      <td><p><span class="red">Potentiel de garde : </span><%= item[:aging_potential] %></p></td>
-                    </tr>
-                    <tr>
-                      <td><p><span class="red">Année : </span><%= item[:year] %></p></td>
-                      <td>
-                        <% if item[:baric] == nil %>
-                          <p></p>
-                        <% else %>
-                          <p><span class='red'>En barique : </span><%= item[:baric] %></p>
-                        <% end %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><p><span class="red">Volume : </span><%= item[:size] %></p></td>
-                      <td>
-                        <% if item[:refinement] == nil %>
-                          <p></p>
-                        <% else %>
-                          <p><span class='red'>En barique : </span><%= item[:refinement] %></p>
-                        <% end %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><p><span class="red">Prix de la bouteille : </span><%= item[:price_bottle] %></p></td>
-                      <td><p></p></td>
-                    </tr>
-                    <tr>
-                      <td><p><span class="red">Prix de la caisse : </span>
-                        <% if item[:price_box] == nil %>
-                          Non disponible
-                        <% else %>
-                          <%= item[:price_box] %>
-                        <% end %>
-                       </p></td>
-                      <td><p></p></td>
-                    </tr>
-                  </table>
-                </div>   
-              </div>
-            </article>
-          <% end %>
-        </div>
-      </div>
     </section>
-    <div id="shade_lightbox"></div>
-    <% if Nanoc.production? %>
-      <script type="text/javascript">
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-2241355-18']);
-        _gaq.push(['_trackPageview']);
+    <section id="details">
+      <div class="close">x</div>
+      <% wines.each_with_index do |item, index| %>
+        <article class="item item_<%= index %>">
+          <%= item.compiled_content %>
+        </article>
+      <% end %>
+    </section>
+    <script type="text/javascript">
+      var wines = {};
+      <% wines.each_with_index do |item, index| %>
+        wines['<%= item[:key]%>'] = {
+          key: '<%= item[:key] %>',
+          index: <%= index %>,
+          name: '<%= item[:name] %>',
+          order: <%= item[:order] %>
+        }
+      <% end %>
 
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-2241355-18']);
+
+      <% if Nanoc.production? %>
         (function() {
          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
          })();
-       </script>
-     <% end %>
+      <% end %>
+    </script>
   </body>
 </html>

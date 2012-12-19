@@ -2,7 +2,21 @@
 
 require File.expand_path('../config/nanoc', __FILE__)
 
+require 'vendor/filters/imagemagick'
+
 ############ Compile ############
+
+compile %r{/assets/images/wine_.+/} do
+  filter :imagemagick, resize: '110'
+end
+
+compile %r{/assets/images/wine_.+/}, :rep => :standing_thumbnail do
+  filter :imagemagick, resize: 'x50'
+end
+
+compile %r{/assets/images/wine_.+/}, :rep => :lying_down do
+  filter :imagemagick, rotate: '90', resize: '920'
+end
 
 compile %r{/assets/(stylesheets|javascripts)/.+/} do
   filter :sprockets, {
@@ -19,6 +33,10 @@ compile %r{/assets/(stylesheets|javascripts)/.+/}, :rep => :gzip do
   filter :gzip
 end
 
+compile '/wines/*/' do
+  filter :erb
+end
+
 compile '*' do
   if item.binary?
     # don’t filter binary items
@@ -30,6 +48,18 @@ end
 
 ############ Route ############
 
+route %r{/assets/images/wine_.+/} do
+  Nanoc::Helpers::Sprockets.asset_path(item)
+end
+
+route %r{/assets/images/wine_.+/}, :rep => :standing_thumbnail do
+  Nanoc::Helpers::Sprockets.asset_path(item, :rep => :standing_thumbnail)
+end
+
+route %r{/assets/images/wine_.+/}, :rep => :lying_down do
+  Nanoc::Helpers::Sprockets.asset_path(item, :rep => :lying_down)
+end
+
 route '/assets/*/' do
   Nanoc::Helpers::Sprockets.asset_path(item)
 end
@@ -40,6 +70,10 @@ end
 
 route '/htaccess/' do
   '/.htaccess'
+end
+
+route '/wines/*/' do
+  # do not create page for each wine because it is included in global layout
 end
 
 route '*' do
