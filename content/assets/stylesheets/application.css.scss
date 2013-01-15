@@ -213,6 +213,24 @@ header.content {
   legend {
     font-size: 1.3em;
   }
+
+  #social_media {
+    margin-top: 10px;
+
+    #like_button {
+      float: left;
+    }
+
+    #subForm {
+      float: right;
+      margin-right: 410px;
+
+      .submit {
+        background-color: $red;
+        color: $white;
+      }
+    }
+  }
 }
 
 /*----------------------------------------*/
