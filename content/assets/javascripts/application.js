@@ -245,6 +245,7 @@
       width: $('section.main').width()
     });
     $('section.main').css('padding-right', scrollbarWidth + 'px');
+    $(window).scrollTop(0);
 
     $('body').css({
       height: Math.max($(window).outerHeight() - ($('#details').outerHeight(true) - $('#details').outerHeight()), $('#details').outerHeight()),
