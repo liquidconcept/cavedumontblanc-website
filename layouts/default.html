@@ -5,6 +5,10 @@
     <title>La cave du Mont-Blanc - Vins Italiens de grandes qualités - Lausanne, Montreux, Riviera</title>
     <meta name="description" content="Nous disposons d'une grande palette de vins italiens et français et sommes en mesure de satisfaire vos exigences. N'hésitez donc pas à nous contacter." />
     <link rel="stylesheet" href="<%= stylesheet_path 'application' %>" media="screen">
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-2241355-18']);
+    </script>
     <script src="<%= javascript_path 'application' %>"></script>
   </head>
   <body>
@@ -44,9 +48,6 @@
           order: <%= item[:order] %>
         }
       <% end %>
-
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-2241355-18']);
 
       <% if Nanoc.production? %>
         (function() {
