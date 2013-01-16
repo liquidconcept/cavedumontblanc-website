@@ -308,6 +308,17 @@ header.content {
         color: $red;
       }
 
+      .price_instead_of {
+        color: $red;
+        font-size: 0.9em;
+        font-style: italic;
+
+        span {
+          font-size: 0.9em;
+          color: $dark_grey;
+        } 
+      }
+
       @include disable-box('disable.png');
     }
 
