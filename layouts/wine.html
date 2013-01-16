@@ -20,11 +20,17 @@
       </tr>
       <tr>
         <td><span class="label">Domaine : </span><%= item[:domain] %></td>
-        <td><span class="label">Accord : </span><%= item[:agreement] %></td>
+        <td><span class="label">Potentiel de garde : </span><%= item[:aging_potential] %></td>
       </tr>
       <tr>
         <td><span class="label">Cépage : </span><%= item[:grape] %></td>
-        <td><span class="label">Potentiel de garde : </span><%= item[:aging_potential] %></td>
+        <td>
+          <% if item[:agreement] == nil %>
+            &nbsp;
+            <% else %>
+            <span class="label">Accord : </span><%= item[:agreement] %>
+          <% end %>
+        </td>
       </tr>
       <tr>
         <td><span class="label">Année : </span><%= item[:year] %></td>
