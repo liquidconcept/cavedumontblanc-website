@@ -115,8 +115,10 @@ body {
   }
 
   sup {
-    vertical-align: super;
-    font-size: smaller;
+    position: relative;
+    vertical-align: top;
+    font-size: 0.5em;
+    top: -0.3em;
   }
 
   a {
