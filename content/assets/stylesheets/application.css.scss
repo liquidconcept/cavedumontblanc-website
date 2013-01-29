@@ -114,6 +114,11 @@ body {
     text-align: justify;
   }
 
+  sup {
+    vertical-align: super;
+    font-size: smaller;
+  }
+
   a {
     @include unstyled-link;
   }
@@ -478,6 +483,12 @@ header.content {
           @include disable-box('min_disable.png');
         }
       }
+    }
+
+    .box_sizes {
+      width: 299px;
+      margin-top: 15px;
+      float: left;
     }
 
     .promo {

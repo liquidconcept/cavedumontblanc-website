@@ -79,7 +79,7 @@
             </div>
             <div class="prices_container">
               <div class="price_content boxes<%= item[:stock_box] ? nil : ' disable' %>">
-                <span class="label">Caisse</span>
+                <span class="label">Caisse <sup><%= wine_box_sizes[item[:box_size]] %></sup></span>
                 <span class="price"><%= item[:price_box] || '&nbsp;' %></span>
                 <input type="number" name="box[<%= item[:name] %>]" placeholder="Qte" class="field"<%= item[:stock_box] ? nil : ' disabled' %>>
                 <div class="out_of_stock"></div>
@@ -93,6 +93,12 @@
             </div>
           </article>
         <% end %>
+
+        <div class="box_sizes">
+          <% wine_box_sizes.each do |box_size, ref| %>
+            <span><%= ref %>. <%= box_size %></span><br />
+          <% end %>
+        </div>
 
         <div class="promo">
           <input type="text" name="code_promo" placeholder="Code promo" class="field" />

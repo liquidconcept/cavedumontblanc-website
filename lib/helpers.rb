@@ -20,3 +20,15 @@ def wine_image_path(item, options = {})
 
   image_path image_item, :rep => rep_name
 end
+
+def wine_box_sizes
+  box_sizes ||= begin
+    box_sizes = {}
+
+    wines.map {|wine| wine[:box_size] }.uniq.compact.each_with_index do |box_size, index|
+      box_sizes[box_size] = index + 1
+    end
+
+    box_sizes
+  end
+end
