@@ -114,6 +114,13 @@ body {
     text-align: justify;
   }
 
+  sup {
+    position: relative;
+    vertical-align: top;
+    font-size: 0.5em;
+    top: -0.3em;
+  }
+
   a {
     @include unstyled-link;
   }
@@ -129,6 +136,10 @@ body {
 
   input, input:focus {
     border: 1px solid $grey;
+  }
+
+  .promo_box {
+    color: $red;
   }
 
   .ui-state-error {
@@ -340,6 +351,17 @@ header.content {
         color: $red;
       }
 
+      .price_instead_of {
+        color: $red;
+        font-size: 0.9em;
+        font-style: italic;
+
+        span {
+          font-size: 0.9em;
+          color: $dark_grey;
+        } 
+      }
+
       @include disable-box('disable.png');
     }
 
@@ -499,6 +521,12 @@ header.content {
           @include disable-box('min_disable.png');
         }
       }
+    }
+
+    .box_sizes {
+      width: 299px;
+      margin-top: 15px;
+      float: left;
     }
 
     .promo {

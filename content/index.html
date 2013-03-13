@@ -37,6 +37,9 @@
         <div class="price_container bottles<%= item[:stock_bottle] ? nil : ' disable' %>">
           <p>Bouteille</p>
           <p class="price"><%= item[:price_bottle] %></p>
+          <% if item[:price_bottle_instead_of] != nil %>
+            <p class="price_instead_of"><span>au lieu de </span><%= item[:price_bottle_instead_of] %></p>
+          <% end %>
           <div class="out_of_stock"></div>
         </div>
         <img src="<%= wine_image_path item, :rep => :lying_down %>" class="bottle">
@@ -86,12 +89,12 @@
             </div>
             <div class="prices_container">
               <div class="price_content boxes<%= item[:stock_box] ? nil : ' disable' %>">
-                <span class="label">Caisse</span>
+                <span class="label">Caisse <sup><%= wine_box_sizes[item[:box_size]] %></sup></span>
                 <span class="price"><%= item[:price_box] || '&nbsp;' %></span>
                 <input type="number" name="box[<%= item[:name] %>]" placeholder="Qte" class="field"<%= item[:stock_box] ? nil : ' disabled' %>>
                 <div class="out_of_stock"></div>
               </div>
-              <div class="price_content bottles <%= item[:stock_bottle] ? nil : ' disable' %>">
+              <div class="price_content bottles<%= item[:stock_bottle] ? nil : ' disable' %>">
                 <span class="label">Bouteille</span>
                 <span class="price"><%= item[:price_bottle] || '&nbsp;' %></span>
                 <input type="number" name="bottle[<%= item[:name] %>]" placeholder="Qte" class="field"<%= item[:stock_bottle] ? nil : ' disabled' %>>
@@ -100,6 +103,12 @@
             </div>
           </article>
         <% end %>
+
+        <div class="box_sizes">
+          <% wine_box_sizes.each do |box_size, ref| %>
+            <span><%= ref %>. <%= box_size %></span><br />
+          <% end %>
+        </div>
 
         <div class="promo">
           <input type="text" name="code_promo" placeholder="Code promo" class="field" />
@@ -124,7 +133,7 @@
     <p>1007 Lausanne</p>
     <p class="phone">+41 (0)21 616 92 92</p>
     <p class="email"><a href="mailto:cavedumontblanc@citycable.ch">cavedumontblanc@citycable.ch</a></p>
-    <p class="horaires"><u>Horaires</u></p>
+    <p class="horaires">Horaires</p>
     <p>Lun-Ven: 9h-12h | 14h-19h</p>
     <p>Sam: 9h-17h</p>
     <p>Dim: fermé</p>
