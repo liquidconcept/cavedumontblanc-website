@@ -232,7 +232,12 @@ header.content {
       float: left;
     }
 
+    #success_message {
+      color: $red;
+    }
+
     #subForm {
+      height: 80px;
       float: right;
       margin-right: 410px;
 
@@ -253,6 +258,12 @@ header.content {
         width: 120px;
         height: 35px;
         font-size: 1em;
+      }
+
+      #error_message {
+        margin-top: 5px;
+        font-size: 0.8em;
+        color: $red;
       }
     }
   }

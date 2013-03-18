@@ -358,5 +358,34 @@
 
     // Placeholder plugin initialization
     $('input[placeholder]').placeholder();
+
+    // bind event on submit form inscription newsletter
+    $("#subForm").on('submit', function(event) {
+      event.preventDefault();
+
+      var form = $(this);
+      var inputs = form.find("input");
+      var serializedData = form.serialize();
+
+      // disable input button 
+      inputs.prop("disabled", true);
+
+      // send insciption to newsletter
+      $.ajax({
+        url: form.attr('action'),
+        type: "POST",
+        data: serializedData,
+        dataType: 'jsonp',
+        success: function(data) {
+          if (data.Status === 400) {
+            $('#error_message').prepend('Véréfier le format de votre email').delay(3000).fadeOut('slow');
+            inputs.prop("disabled", false);
+          } else { // 200 OK
+            $('#subForm').hide();
+            $('#success_message').delay(6000).prepend('<h3>Votre insciption a été enregistré !</h3>').fadeIn('slow');
+          }
+        }
+      });
+    });
   });
 })(jQuery);
