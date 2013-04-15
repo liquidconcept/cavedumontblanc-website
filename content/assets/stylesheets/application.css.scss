@@ -224,6 +224,49 @@ header.content {
   legend {
     font-size: 1.3em;
   }
+
+  #social_media {
+    margin-top: 35px;
+
+    #like_button {
+      float: left;
+    }
+
+    #success_message {
+      color: $red;
+    }
+
+    #subForm {
+      height: 80px;
+      float: right;
+      margin-right: 410px;
+
+      p {
+        margin-bottom: 10px;
+        color: $red;
+      }
+
+      .field_email {
+        width: 280px;
+        height: 30px;
+        font-size: 1em;
+      }
+
+      .submit {
+        background-color: $red;
+        color: $white;
+        width: 120px;
+        height: 35px;
+        font-size: 1em;
+      }
+
+      #error_message {
+        margin-top: 5px;
+        font-size: 0.8em;
+        color: $red;
+      }
+    }
+  }
 }
 
 /*----------------------------------------*/
