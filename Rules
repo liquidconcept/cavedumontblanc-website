@@ -23,13 +23,7 @@ compile %r{/assets/(stylesheets|javascripts)/.+/} do
     :css_compressor => Nanoc.production? ? :scss : nil,
     :js_compressor => Nanoc.production? ? :uglifier : nil
   }
-end
-
-compile %r{/assets/(stylesheets|javascripts)/.+/}, :rep => :gzip do
-  filter :sprockets, {
-    :css_compressor => Nanoc.production? ? :scss : nil,
-    :js_compressor => Nanoc.production? ? :uglifier : nil
-  }
+  snapshot :text
   filter :gzip
 end
 
@@ -60,11 +54,11 @@ route %r{/assets/images/wine_.+/}, :rep => :lying_down do
   Nanoc::Helpers::Sprockets.asset_path(item, :rep => :lying_down)
 end
 
-route '/assets/*/' do
+route '/assets/*/', :snapshot => :text do
   Nanoc::Helpers::Sprockets.asset_path(item)
 end
 
-route '/assets/*/', :rep => :gzip do
+route '/assets/*/' do
   Nanoc::Helpers::Sprockets.asset_path(item) + '.gz'
 end
 
