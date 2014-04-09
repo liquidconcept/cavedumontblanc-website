@@ -396,6 +396,7 @@ header.content {
   form {
     @include pie-clearfix;
     position: relative;
+    min-height: 350px;
   }
 
   h3 {
