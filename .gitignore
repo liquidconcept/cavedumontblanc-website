@@ -1,5 +1,7 @@
 /public/
 /tmp/
+/log/
 .DS_Store
 .sass-cache/
 .powder
+crash.log
